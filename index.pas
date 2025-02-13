@@ -25,7 +25,7 @@ var
     Diagnosa : ArrayDiagnosa;
 
     Pilihan,PilihanDokter,PilihanPasien, PilihanAsc,
-    PilihanDsc,PilihanPengurutan,PilihanPencarian ,BanyakData : integer;
+    PilihanDsc,PilihanPengurutan,PilihanPencarian ,MetodeCariPasein,BanyakData : integer;
 
 //Testing Array
 procedure ArrayTest(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
@@ -974,15 +974,17 @@ begin
 
     if (Ketemu) then
     begin
-        writeln(DataCari, ' Ditemukan pada indeks ke-', K);
-        writeln('------------DATA KE-',K,'---------------------');
-        writeln('No. Rekam Medis            : ',NoRM[K]);
-        writeln('Nama                       : ',Nama[K]);
-        writeln('Jenis Kelamin              : ',JenisKelamin[K]);
-        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[K]);
-        writeln('Berat Badan                : ',BeratBadan[K]);
-        writeln('Tinggi Badan               : ',TinggiBadan[K]);
-        writeln('Diagnosa                   : ',Diagnosa[K]);
+        writeln('+-------------------------------------------------------+');
+        writeln('|                 DATA PASEIN-',K,'                         |');
+        writeln('+-------------------------------------------------------+');
+        writeln('| No. Rekam Medis            :      ', NoRM[K]:8, '            |');
+        writeln('| Nama                       : ', Nama[K]:15, '          |');
+        writeln('| Jenis Kelamin              :            ', JenisKelamin[K]:2,'            |');
+        writeln('| Tanggal Periksa [DD/MM/YY] :     ', TanggalPeriksa[K]:10, '           |');
+        writeln('| Berat Badan                :         ', BeratBadan[K]:5, '            |');
+        writeln('| Tinggi Badan               :         ', TinggiBadan[K]:5, '            |');
+        writeln('| Diagnosa                   : ', Diagnosa[K]:15, '          |');
+        writeln('+-------------------------------------------------------+');
     end
     else
     begin
@@ -1004,15 +1006,17 @@ begin
     end;
     if(Nama[i] = DataCari) then
     begin
-        writeln(DataCari,'Ditemukan pada indeks ke-',i);
-        writeln('------------DATA KE-',i,'---------------------');
-        writeln('No. Rekam Medis            : ',NoRM[i]);
-        writeln('Nama                       : ',Nama[i]);
-        writeln('Jenis Kelamin              : ',JenisKelamin[i]);
-        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
-        writeln('Berat Badan                : ',BeratBadan[i]);
-        writeln('Tinggi Badan               : ',TinggiBadan[i]);
-        writeln('Diagnosa                   : ',Diagnosa[i]);
+        writeln('+-------------------------------------------------------+');
+        writeln('|                 DATA PASEIN-',i,'                         |');
+        writeln('+-------------------------------------------------------+');
+        writeln('| No. Rekam Medis            :      ', NoRM[i]:8, '            |');
+        writeln('| Nama                       : ', Nama[i]:15, '          |');
+        writeln('| Jenis Kelamin              :            ', JenisKelamin[i]:2,'            |');
+        writeln('| Tanggal Periksa [DD/MM/YY] :     ', TanggalPeriksa[i]:10, '           |');
+        writeln('| Berat Badan                :         ', BeratBadan[i]:5, '            |');
+        writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
+        writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
+        writeln('+-------------------------------------------------------+');
     end
     else
     begin
@@ -1035,14 +1039,17 @@ begin
         if JenisKelamin[i] = DataCari then
         begin
             Ditemukan := true; // Data ditemukan
-            writeln('------------DATA KE-', i, '---------------------');
-            writeln('No. Rekam Medis            : ', NoRM[i]);
-            writeln('Nama                       : ', Nama[i]);
-            writeln('Jenis Kelamin              : ', JenisKelamin[i]);
-            writeln('Tanggal Periksa [DD/MM/YY] : ', TanggalPeriksa[i]);
-            writeln('Berat Badan                : ', BeratBadan[i]);
-            writeln('Tinggi Badan               : ', TinggiBadan[i]);
-            writeln('Diagnosa                   : ', Diagnosa[i]);
+            writeln('+-------------------------------------------------------+');
+            writeln('|                 DATA PASEIN-',i,'                         |');
+            writeln('+-------------------------------------------------------+');
+            writeln('| No. Rekam Medis            :      ', NoRM[i]:8, '            |');
+            writeln('| Nama                       : ', Nama[i]:15, '          |');
+            writeln('| Jenis Kelamin              :            ', JenisKelamin[i]:2,'            |');
+            writeln('| Tanggal Periksa [DD/MM/YY] :     ', TanggalPeriksa[i]:10, '           |');
+            writeln('| Berat Badan                :         ', BeratBadan[i]:5, '            |');
+            writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
+            writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
+            writeln('+-------------------------------------------------------+');
             writeln; // Beri jarak antar data
         end;
     end;
@@ -1067,14 +1074,17 @@ begin
         if(TanggalPeriksa[i] = DataCari) then
         begin
             Ditemukan := true; // Data ditemukan
-            writeln('------------DATA KE-', i, '---------------------');
-            writeln('No. Rekam Medis            : ', NoRM[i]);
-            writeln('Nama                       : ', Nama[i]);
-            writeln('Jenis Kelamin              : ', JenisKelamin[i]);
-            writeln('Tanggal Periksa [DD/MM/YY] : ', TanggalPeriksa[i]);
-            writeln('Berat Badan                : ', BeratBadan[i]);
-            writeln('Tinggi Badan               : ', TinggiBadan[i]);
-            writeln('Diagnosa                   : ', Diagnosa[i]);
+            writeln('+-------------------------------------------------------+');
+            writeln('|                 DATA PASEIN-',i,'                         |');
+            writeln('+-------------------------------------------------------+');
+            writeln('| No. Rekam Medis            :      ', NoRM[i]:8, '            |');
+            writeln('| Nama                       : ', Nama[i]:15, '          |');
+            writeln('| Jenis Kelamin              :            ', JenisKelamin[i]:2,'            |');
+            writeln('| Tanggal Periksa [DD/MM/YY] :     ', TanggalPeriksa[i]:10, '           |');
+            writeln('| Berat Badan                :         ', BeratBadan[i]:5, '            |');
+            writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
+            writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
+            writeln('+-------------------------------------------------------+');
             writeln; // Beri jarak antar data
         end;
     end;
@@ -1099,14 +1109,17 @@ begin
         if(BeratBadan[i] = DataCari) then
         begin
             Ditemukan := true; // Data ditemukan
-            writeln('------------DATA KE-', i, '---------------------');
-            writeln('No. Rekam Medis            : ', NoRM[i]);
-            writeln('Nama                       : ', Nama[i]);
-            writeln('Jenis Kelamin              : ', JenisKelamin[i]);
-            writeln('Tanggal Periksa [DD/MM/YY] : ', TanggalPeriksa[i]);
-            writeln('Berat Badan                : ', BeratBadan[i]);
-            writeln('Tinggi Badan               : ', TinggiBadan[i]);
-            writeln('Diagnosa                   : ', Diagnosa[i]);
+            writeln('+-------------------------------------------------------+');
+            writeln('|                 DATA PASEIN-',i,'                         |');
+            writeln('+-------------------------------------------------------+');
+            writeln('| No. Rekam Medis            :      ', NoRM[i]:8, '            |');
+            writeln('| Nama                       : ', Nama[i]:15, '          |');
+            writeln('| Jenis Kelamin              :            ', JenisKelamin[i]:2,'            |');
+            writeln('| Tanggal Periksa [DD/MM/YY] :     ', TanggalPeriksa[i]:10, '           |');
+            writeln('| Berat Badan                :         ', BeratBadan[i]:5, '            |');
+            writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
+            writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
+            writeln('+-------------------------------------------------------+');
             writeln; // Beri jarak antar data
         end;
     end;
@@ -1131,14 +1144,17 @@ begin
         if(TinggiBadan[i] = DataCari) then
         begin
             Ditemukan := true; // Data ditemukan
-            writeln('------------DATA KE-', i, '---------------------');
-            writeln('No. Rekam Medis            : ', NoRM[i]);
-            writeln('Nama                       : ', Nama[i]);
-            writeln('Jenis Kelamin              : ', JenisKelamin[i]);
-            writeln('Tanggal Periksa [DD/MM/YY] : ', TanggalPeriksa[i]);
-            writeln('Berat Badan                : ', BeratBadan[i]);
-            writeln('Tinggi Badan               : ', TinggiBadan[i]);
-            writeln('Diagnosa                   : ', Diagnosa[i]);
+            writeln('+-------------------------------------------------------+');
+            writeln('|                 DATA PASEIN-',i,'                         |');
+            writeln('+-------------------------------------------------------+');
+            writeln('| No. Rekam Medis            :      ', NoRM[i]:8, '            |');
+            writeln('| Nama                       : ', Nama[i]:15, '          |');
+            writeln('| Jenis Kelamin              :            ', JenisKelamin[i]:2,'            |');
+            writeln('| Tanggal Periksa [DD/MM/YY] :     ', TanggalPeriksa[i]:10, '           |');
+            writeln('| Berat Badan                :         ', BeratBadan[i]:5, '            |');
+            writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
+            writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
+            writeln('+-------------------------------------------------------+');
             writeln; // Beri jarak antar data
         end;
     end;
@@ -1165,14 +1181,18 @@ begin
         if(Diagnosa[i] = DataCari) then
         begin
             Ditemukan := true; // Data ditemukan
-            writeln('------------DATA KE-', i, '---------------------');
-            writeln('No. Rekam Medis            : ', NoRM[i]);
-            writeln('Nama                       : ', Nama[i]);
-            writeln('Jenis Kelamin              : ', JenisKelamin[i]);
-            writeln('Tanggal Periksa [DD/MM/YY] : ', TanggalPeriksa[i]);
-            writeln('Berat Badan                : ', BeratBadan[i]);
-            writeln('Tinggi Badan               : ', TinggiBadan[i]);
-            writeln('Diagnosa                   : ', Diagnosa[i]);
+            writeln('+-------------------------------------------------------+');
+            writeln('|                 DATA PASEIN-',i,'                         |');
+            writeln('+-------------------------------------------------------+');
+            writeln('| No. Rekam Medis            :      ', NoRM[i]:8, '            |');
+            writeln('| Nama                       : ', Nama[i]:15, '          |');
+            writeln('| Jenis Kelamin              :            ', JenisKelamin[i]:2,'            |');
+            writeln('| Tanggal Periksa [DD/MM/YY] :     ', TanggalPeriksa[i]:10, '           |');
+            writeln('| Berat Badan                :         ', BeratBadan[i]:5, '            |');
+            writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
+            writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
+            writeln('+-------------------------------------------------------+');
+
             writeln; // Beri jarak antar data
         end;
     end;
@@ -1251,7 +1271,7 @@ begin
     writeln('| Jumlah Pasien Perempuan | ', JumlahPerempuan:8, '         |');
     writeln('+-------------------------+------------------+');
     writeln('| Rata-rata Berat Badan   | ', RataBerat:8:2, ' kg      |');
-    writeln('| Rata-rata Tinggi Badan  | ', RataTinggi:8:2, '   cm    |');
+    writeln('| Rata-rata Tinggi Badan  | ', RataTinggi:8:2, ' cm      |');
     writeln('+-------------------------+------------------+');
     writeln('| Berat Maksimum          | ', MaxBerat:8, ' kg      |');
     writeln('| Berat Minimum           | ', MinBerat:8, ' kg      |');
@@ -1260,7 +1280,18 @@ begin
     writeln('+-------------------------+------------------+');
 end;
 
+procedure PilihanCariPasien(var MetodeCariPasein : integer);
+begin
+    writeln ('+================================+');
+    writeln ('|          MENU PASIEN           |');
+    writeln ('+================================+');
+    writeln ('|       1. Cari Rekam Medis      |');
+    writeln ('|       2. Cari Nama             |');
+    writeln ('|       0. Keluar                |');
+    writeln ('+================================+');
+    write('Pilihan? ');readln(MetodeCariPasein);
 
+end;
 
 
 //Algoritma Utama
@@ -1281,6 +1312,21 @@ begin
                             clrscr;
                             UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                             CariNoRM(NoRM, BanyakData);
+                            PilihanCariPasien(MetodeCariPasein);
+                            while(MetodeCariPasein <> 0) do
+                            begin
+                                case(MetodeCariPasein) of
+                                    1 : begin
+                                        clrscr;
+                                        UrutNoRMDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
+                                        CariNoRM(NoRM, BanyakData);
+                                    end;
+                                    2 : begin
+                                        clrscr;
+                                        CariNama(Nama);
+                                    end;
+                                end;
+                            end;
                         end;
                     end;
                 readln;
