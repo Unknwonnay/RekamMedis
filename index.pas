@@ -46,7 +46,7 @@ begin
     JenisKelamin[2]     := 'L';
     TanggalPeriksa[2]   := '120225';
     BeratBadan[2]       := 80;
-    TinggiBadan[2]      := 165;
+    TinggiBadan[2]      := 160;
     Diagnosa[2]         := 'Demam';
 
     //array 3
@@ -54,7 +54,7 @@ begin
     Nama[3]             := 'Gusti';
     JenisKelamin[3]     := 'L';
     TanggalPeriksa[3]   := '120225';
-    BeratBadan[3]       := 50;
+    BeratBadan[3]       := 80;
     TinggiBadan[3]      := 160;
     Diagnosa[3]         := 'Diare';
 
@@ -107,10 +107,14 @@ end;
 
 procedure MenuPilihan(var Pilihan : integer);
 begin
-    writeln('---- REKAM MEDIS -----');
-    writeln('1. Pasien');
-    writeln('2. Dokter');
-    writeln('0. Keluar');
+   writeln ('+=====================+');
+   writeln ('|     REKAM MEDIS     |');
+   writeln ('+=====================+');
+   writeln ('|      1. Pasien      |');
+   writeln ('|      2. Dokter      |');
+   writeln ('|      0. Keluar      |');
+   writeln ('+=====================+');
+
 
     write('Pilihan ? ');readln(Pilihan);
     while(Pilihan  < 0) or (Pilihan  > 2) do
@@ -118,32 +122,39 @@ begin
         writeln('Pilih yang ada di menu!');
         readln;
         clrscr;
-        writeln('---- REKAM MEDIS -----');
-        writeln('1. Pasien');
-        writeln('2. Dokter');
-        writeln('0. Keluar');
-
+        writeln ('+=====================+');
+        writeln ('|     REKAM MEDIS     |');
+        writeln ('+=====================+');
+        writeln ('|      1. Pasien      |');
+        writeln ('|      2. Dokter      |');
+        writeln ('|      0. Keluar      |');
+        writeln ('+=====================+');
         write('Pilihan ? ');readln(Pilihan);
     end;
 end;
 
 procedure MenuPasien(var PilihanPasien : integer);
 begin
-    writeln('---- MENU PASIEN -----');
-    writeln('1. Cari Data');
-    writeln('2. Tampilkan Data');
-    writeln('0. Keluar');
+    writeln ('+================================+');
+    writeln ('|          MENU PASIEN           |');
+    writeln ('+================================+');
+    writeln ('|         1. Cari Data           |');
+    writeln ('|         0. Keluar              |');
+    writeln ('+================================+');
+
 
     write('Pilihan ? ');readln(PilihanPasien);
-    while(PilihanPasien  < 0) or (PilihanPasien  > 2) do
+    while(PilihanPasien  < 0) or (PilihanPasien  > 1) do
     begin
         writeln('Pilih yang ada di menu!');
         readln;
         clrscr;
-        writeln('---- MENU PASIEN -----');
-        writeln('1. Cari Data');
-        writeln('2. Tampilkan Data');
-        writeln('0. Keluar');
+        writeln ('+================================+');
+        writeln ('|          MENU PASIEN           |');
+        writeln ('+================================+');
+        writeln ('|         1. Cari Data           |');
+        writeln ('|         0. Keluar              |');
+        writeln ('+================================+');
         write('Pilihan ? ');readln(PilihanPasien);
     end;
 end;
@@ -151,31 +162,40 @@ end;
 
 procedure MenuDokter(var PilihanDokter : integer);
 begin
-    writeln('---- MENU DOKTER -----');
-    writeln('1. Isi Data');
-    writeln('2. Tampilkan Data');
-    writeln('3. Edit Data');
-    writeln('4. Pengurutan Data');
-    writeln('5. Pencarian Data');
-    writeln('6. Penghapusan Data');
-    writeln('7. Penghancuran Data');
-    writeln('0. Keluar');
+    writeln ('+=====================================+');
+    writeln ('|            MENU DOKTER              |');
+    writeln ('+=====================================+');
+    writeln ('|          1. Isi Data                |');
+    writeln ('|          2. Tampilkan Data          |');
+    writeln ('|          3. Edit Data               |');
+    writeln ('|          4. Pengurutan Data         |');
+    writeln ('|          5. Pencarian Data          |');
+    writeln ('|          6. Penghapusan Data        |');
+    writeln ('|          7. Penghancuran Data       |');
+    writeln ('|          8. Rekap Rekam Medis       |');
+    writeln ('|          0. Keluar                  |');
+    writeln ('+=====================================+');
+
 
     write('Pilihan ? ');readln(PilihanDokter);
-    while(PilihanDokter  < 0) or (PilihanDokter  > 7) do
+    while(PilihanDokter  < 0) or (PilihanDokter  > 8) do
     begin
         writeln('Pilih yang ada di menu!');
         readln;
         clrscr;
-        writeln('---- MENU DOKTER -----');
-        writeln('1. Isi Data');
-        writeln('2. Tampilkan Data');
-        writeln('3. Edit Data');
-        writeln('4. Pengurutan Data');
-        writeln('5. Pencarian Data');
-        writeln('6. Penghapusan Data');
-        writeln('7. Penghancuran Data');
-        writeln('0. Keluar');
+        writeln ('+=====================================+');
+        writeln ('|            MENU DOKTER              |');
+        writeln ('+=====================================+');
+        writeln ('|          1. Isi Data                |');
+        writeln ('|          2. Tampilkan Data          |');
+        writeln ('|          3. Edit Data               |');
+        writeln ('|          4. Pengurutan Data         |');
+        writeln ('|          5. Pencarian Data          |');
+        writeln ('|          6. Penghapusan Data        |');
+        writeln ('|          7. Penghancuran Data       |');
+        writeln ('|          8. Rekap Rekam Medis       |');
+        writeln ('|          0. Keluar                  |');
+        writeln ('+=====================================+');
         write('Pilihan ? ');readln(PilihanDokter);
     end;
 end;
@@ -257,15 +277,17 @@ begin
         end;
 
         clrscr;
-        writeln('<<  PILIH YANG MAU DI EDIT >> ');
-        writeln('1. Nama');
-        writeln('2. Jenis Kelamin');
-        writeln('3. Tanggaal Periksa');
-        writeln('4. Berat Badan');
-        writeln('5. Tinggi Badan');
-        writeln('6. Diagnosa');
-        writeln('0. Keluar');
-        
+        writeln ('+=====================================+');
+        writeln ('|        PILIH YANG MAU DI EDIT       |');
+        writeln ('+=====================================+');
+        writeln ('|           1. Nama                   |');
+        writeln ('|           2. Jenis Kelamin          |');
+        writeln ('|           3. Tanggaal Periksa       |');
+        writeln ('|           4. Berat Badan            |');
+        writeln ('|           5. Tinggi Badan           |');
+        writeln ('|           6. Diagnosa               |');
+        writeln ('|           0. Keluar                 |');
+        writeln ('+=====================================+');
         write('Pilihan?');readln(PilihanEdit);
 
         case(PilihanEdit) of
@@ -787,9 +809,13 @@ begin
     end
     else
     begin
-        writeln('<< Menu Pengrutan >>');
-        writeln('1. Ascending');
-        writeln('2. Descending');
+        writeln ('+=====================================+');
+        writeln ('|           MENU PENGURUTAN           |');
+        writeln ('+=====================================+');
+        writeln ('|            1. Ascending             |');
+        writeln ('|            2. Descending            |');
+        writeln ('|            0. Keluar                |');
+        writeln ('+=====================================+');
         write('Pilihan? ');readln(PilihanPengurutan);
     end;
     
@@ -798,23 +824,31 @@ end;
 
 procedure MenuSortingAsc(var PilihanAsc : integer);
 begin
-    writeln('<< MENGURUTKAN DATA SECARA ASC >>');
-    writeln('1. No. Rekam Medis');
-    writeln('2. Nama');
-    writeln('3. Tanggal Periksa');
-    writeln('4. Berat Badan');
-    writeln('5. Tinggi Badan');
+    writeln ('+=========================================+');
+    writeln ('|       MENGURUTKAN DATA SECARA ASC       |');
+    writeln ('+=========================================+');
+    writeln ('|            1. No. Rekam Medis           |');
+    writeln ('|            2. Nama                      |');
+    writeln ('|            3. Tanggal Periksa           |');
+    writeln ('|            4. Berat Badan               |');
+    writeln ('|            5. Tinggi Badan              |');
+    writeln ('|            0. Keluar                    |');
+    writeln ('+=========================================+');
     write('Pilihan? ');readln(PilihanAsc);
 end;
 
 procedure MenuSortingDsc(var PilihanDsc : integer);
 begin
-    writeln('<< MENGURUTKAN DATA SECARA DSC >>');
-    writeln('1. No. Rekam Medis');
-    writeln('2. Nama');
-    writeln('3. Tanggal Periksa');
-    writeln('4. Berat Badan');
-    writeln('5. Tinggi Badan');
+    writeln ('+=========================================+');
+    writeln ('|       MENGURUTKAN DATA SECARA ASC       |');
+    writeln ('+=========================================+');
+    writeln ('|            1. No. Rekam Medis           |');
+    writeln ('|            2. Nama                      |');
+    writeln ('|            3. Tanggal Periksa           |');
+    writeln ('|            4. Berat Badan               |');
+    writeln ('|            5. Tinggi Badan              |');
+    writeln ('|            0. Keluar                    |');
+    writeln ('+=========================================+');
     write('Pilihan? ');readln(PilihanDsc);
 end;
 
@@ -829,7 +863,8 @@ var
 begin
     if (BanyakData = 0) then
     begin
-        writeln('Data belum ada!');
+        writeln('Data belum ada!');    writeln('0. Keluar');
+
     end
     else
     begin
@@ -885,14 +920,18 @@ end;
 
 procedure MenuPecarian(var PilihanPencarian : integer);
 begin
-    writeln('<<         MENU PENCARIAN      >>');
-    writeln('1. Cari No. Rekam Medis');
-    writeln('2. Cari Nama');
-    writeln('3. Cari Jenis Kelamin');
-    writeln('4. Cari Tanggal Periksa');
-    writeln('5. Cari Berat Badan');
-    writeln('5. Cari Tinggi Badan');
-    writeln('7. Cari Diagnosis');
+    writeln ('+===========================================+');
+    writeln ('|               MENU PENCARIAN              |');
+    writeln ('+===========================================+');
+    writeln ('|            1. Cari No. Rekam Medis        |');
+    writeln ('|            2. Cari Nama                   |');
+    writeln ('|            3. Cari Jenis Kelamin          |');
+    writeln ('|            4. Cari Tanggal Periksa        |');
+    writeln ('|            5. Cari Berat Badan            |');
+    writeln ('|            6. Cari Tinggi Badan           |');
+    writeln ('|            7. Cari Diagnosis              |');
+    writeln ('|            0. Keluar                      |');
+    writeln ('+===========================================+');
     write('Pilihan? ');readln(PilihanPencarian);
 end;
 
@@ -1017,122 +1056,129 @@ procedure CariTanggalPeriksa(var TanggalPeriksa : ArrayTanggal);
 var
     i : integer;
     DataCari : string;
+    Ditemukan : boolean; // Variabel untuk menandai apakah data ditemukan
 begin
     write('Tanggal Periksa yang dicari : ');readln(DataCari);
-    i := 1;
+    Ditemukan := false; // Awalnya asumsikan data tidak ditemukan
 
-    while(TanggalPeriksa[i] <> DataCari) and (i < MAKSDATA) do
+    for i := 1 to MAKSDATA do // Periksa semua data dalam array
     begin
-        i := i + 1;
+        if(TanggalPeriksa[i] = DataCari) then
+        begin
+            Ditemukan := true; // Data ditemukan
+            writeln('------------DATA KE-', i, '---------------------');
+            writeln('No. Rekam Medis            : ', NoRM[i]);
+            writeln('Nama                       : ', Nama[i]);
+            writeln('Jenis Kelamin              : ', JenisKelamin[i]);
+            writeln('Tanggal Periksa [DD/MM/YY] : ', TanggalPeriksa[i]);
+            writeln('Berat Badan                : ', BeratBadan[i]);
+            writeln('Tinggi Badan               : ', TinggiBadan[i]);
+            writeln('Diagnosa                   : ', Diagnosa[i]);
+            writeln; // Beri jarak antar data
+        end;
     end;
-    if(TanggalPeriksa[i] = DataCari) then
+
+    if not Ditemukan then
     begin
-        writeln(DataCari,'Ditemukan pada indeks ke-',i);
-        writeln('------------DATA KE-',i,'---------------------');
-        writeln('No. Rekam Medis            : ',NoRM[i]);
-        writeln('Nama                       : ',Nama[i]);
-        writeln('Jenis Kelamin              : ',JenisKelamin[i]);
-        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
-        writeln('Berat Badan                : ',BeratBadan[i]);
-        writeln('Tinggi Badan               : ',TinggiBadan[i]);
-        writeln('Diagnosa                   : ',Diagnosa[i]);
-    end
-    else
-    begin
-        writeln(DataCari,'Tidak ditemukan');
-        
+        writeln(DataCari, ' Tidak ditemukan');
     end;
 end;
+
 
 procedure CariBeratBadan(var BeratBadan : ArrayBerat);
 var
-    i, DataCari: integer;
-
+    i,DataCari : integer;
+    Ditemukan : boolean; // Variabel untuk menandai apakah data ditemukan
 begin
     write('Berat Badan yang dicari : ');readln(DataCari);
-    i := 1;
+    Ditemukan := false; // Awalnya asumsikan data tidak ditemukan
 
-    while(BeratBadan[i] <> DataCari) and (i < MAKSDATA) do
+    for i := 1 to MAKSDATA do // Periksa semua data dalam array
     begin
-        i := i + 1;
+        if(BeratBadan[i] = DataCari) then
+        begin
+            Ditemukan := true; // Data ditemukan
+            writeln('------------DATA KE-', i, '---------------------');
+            writeln('No. Rekam Medis            : ', NoRM[i]);
+            writeln('Nama                       : ', Nama[i]);
+            writeln('Jenis Kelamin              : ', JenisKelamin[i]);
+            writeln('Tanggal Periksa [DD/MM/YY] : ', TanggalPeriksa[i]);
+            writeln('Berat Badan                : ', BeratBadan[i]);
+            writeln('Tinggi Badan               : ', TinggiBadan[i]);
+            writeln('Diagnosa                   : ', Diagnosa[i]);
+            writeln; // Beri jarak antar data
+        end;
     end;
-    if(BeratBadan[i] = DataCari) then
+
+    if not Ditemukan then
     begin
-        writeln(DataCari,'Ditemukan pada indeks ke-',i);
-        writeln('------------DATA KE-',i,'---------------------');
-        writeln('No. Rekam Medis            : ',NoRM[i]);
-        writeln('Nama                       : ',Nama[i]);
-        writeln('Jenis Kelamin              : ',JenisKelamin[i]);
-        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
-        writeln('Berat Badan                : ',BeratBadan[i]);
-        writeln('Tinggi Badan               : ',TinggiBadan[i]);
-        writeln('Diagnosa                   : ',Diagnosa[i]);
-    end
-    else
-    begin
-        writeln(DataCari,'Tidak ditemukan');
-        
+        writeln(DataCari, ' Tidak ditemukan');
     end;
 end;
-procedure CariTinggiBadan(var TInggiBadan : Arraytinggi);
-var
-   i, DataCari: integer;
 
+
+procedure CariTinggiBadan(var TinggiBadan : ArrayTinggi);
+var
+    i,DataCari : integer;
+    Ditemukan : boolean; // Variabel untuk menandai apakah data ditemukan
 begin
     write('Tinggi Badan yang dicari : ');readln(DataCari);
-    i := 1;
+    Ditemukan := false; // Awalnya asumsikan data tidak ditemukan
 
-    while(TInggiBadan[i] <> DataCari) and (i < MAKSDATA) do
+    for i := 1 to MAKSDATA do // Periksa semua data dalam array
     begin
-        i := i + 1;
+        if(TinggiBadan[i] = DataCari) then
+        begin
+            Ditemukan := true; // Data ditemukan
+            writeln('------------DATA KE-', i, '---------------------');
+            writeln('No. Rekam Medis            : ', NoRM[i]);
+            writeln('Nama                       : ', Nama[i]);
+            writeln('Jenis Kelamin              : ', JenisKelamin[i]);
+            writeln('Tanggal Periksa [DD/MM/YY] : ', TanggalPeriksa[i]);
+            writeln('Berat Badan                : ', BeratBadan[i]);
+            writeln('Tinggi Badan               : ', TinggiBadan[i]);
+            writeln('Diagnosa                   : ', Diagnosa[i]);
+            writeln; // Beri jarak antar data
+        end;
     end;
-    if(TInggiBadan[i] = DataCari) then
+
+    if not Ditemukan then
     begin
-        writeln(DataCari,'Ditemukan pada indeks ke-',i);
-        writeln('------------DATA KE-',i,'---------------------');
-        writeln('No. Rekam Medis            : ',NoRM[i]);
-        writeln('Nama                       : ',Nama[i]);
-        writeln('Jenis Kelamin              : ',JenisKelamin[i]);
-        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
-        writeln('Berat Badan                : ',BeratBadan[i]);
-        writeln('Tinggi Badan               : ',TinggiBadan[i]);
-        writeln('Diagnosa                   : ',Diagnosa[i]);
-    end
-    else
-    begin
-        writeln(DataCari,'Tidak ditemukan');
-        
+        writeln(DataCari, ' Tidak ditemukan');
     end;
 end;
+
+
 
 procedure CariDiagnosa(var Diagnosa : ArrayDiagnosa);
 var
     i : integer;
     DataCari : string;
+    Ditemukan : boolean; // Variabel untuk menandai apakah data ditemukan
 begin
     write('Diagnosa yang dicari : ');readln(DataCari);
-    i := 1;
+    Ditemukan := false; // Awalnya asumsikan data tidak ditemukan
 
-    while(Diagnosa[i] <> DataCari) and (i < MAKSDATA) do
+    for i := 1 to MAKSDATA do // Periksa semua data dalam array
     begin
-        i := i + 1;
+        if(Diagnosa[i] = DataCari) then
+        begin
+            Ditemukan := true; // Data ditemukan
+            writeln('------------DATA KE-', i, '---------------------');
+            writeln('No. Rekam Medis            : ', NoRM[i]);
+            writeln('Nama                       : ', Nama[i]);
+            writeln('Jenis Kelamin              : ', JenisKelamin[i]);
+            writeln('Tanggal Periksa [DD/MM/YY] : ', TanggalPeriksa[i]);
+            writeln('Berat Badan                : ', BeratBadan[i]);
+            writeln('Tinggi Badan               : ', TinggiBadan[i]);
+            writeln('Diagnosa                   : ', Diagnosa[i]);
+            writeln; // Beri jarak antar data
+        end;
     end;
-    if(Diagnosa[i] = DataCari) then
+
+    if not Ditemukan then
     begin
-        writeln(DataCari,'Ditemukan pada indeks ke-',i);
-        writeln('------------DATA KE-',i,'---------------------');
-        writeln('No. Rekam Medis            : ',NoRM[i]);
-        writeln('Nama                       : ',Nama[i]);
-        writeln('Jenis Kelamin              : ',JenisKelamin[i]);
-        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
-        writeln('Berat Badan                : ',BeratBadan[i]);
-        writeln('Tinggi Badan               : ',TinggiBadan[i]);
-        writeln('Diagnosa                   : ',Diagnosa[i]);
-    end
-    else
-    begin
-        writeln(DataCari,'Tidak ditemukan');
-        
+        writeln(DataCari, ' Tidak ditemukan');
     end;
 end;
 
@@ -1153,11 +1199,8 @@ begin
                     case (PilihanPasien) of
                         1 : begin
                             clrscr;
-                            writeln('<< MENCARI DATA >>');
-                        end;
-                        2 : begin
-                            clrscr;
-                            writeln('<< MENAMPILKAN DATA >>');
+                            UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
+                            CariNoRM(NoRM, BanyakData);
                         end;
                     end;
                 readln;
@@ -1336,6 +1379,9 @@ begin
                             BanyakData := 0;
                             writeln('Semua data telah dihancurkan');
                         end;
+                        8: begin
+                            writeln('REKAP REKAM MEDIS');
+                        end;
                     end;
                 readln;
                 clrscr;
@@ -1349,12 +1395,3 @@ begin
     clrscr;
     write('Selamat Tinggal!');
 end.
-
-(* writeln('<<         MENU PENCARIAN      >>');
-    writeln('1. Cari No. Rekam Medis');
-    writeln('2. Cari Nama');
-    writeln('3. Cari Jenis Kelamin');
-    writeln('4. Cari Tanggal Periksa');
-    writeln('5. Cari Berat Badan');
-    writeln('5. Cari Tinggi Badan');
-    writeln('7. Cari Diagnosis'); *)
