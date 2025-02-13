@@ -94,14 +94,17 @@ begin
     begin
         for i := 1 to BanyakData do
         begin
-            writeln('------------DATA KE-',i,'---------------------');
-            writeln('No. Rekam Medis            : ',NoRM[i]);
-            writeln('Nama                       : ',Nama[i]);
-            writeln('Jenis Kelamin              : ',JenisKelamin[i]);
-            writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
-            writeln('Berat Badan                : ',BeratBadan[i]);
-            writeln('Tinggi Badan               : ',TinggiBadan[i]);
-            writeln('Diagnosa                   : ',Diagnosa[i]);
+            writeln('+-------------------------------------------------------+');
+            writeln('|                 DATA PASEIN-',i,'                         |');
+            writeln('+-------------------------------------------------------+');
+            writeln('| No. Rekam Medis            :      ', NoRM[i]:8, '            |');
+            writeln('| Nama                       : ', Nama[i]:15, '          |');
+            writeln('| Jenis Kelamin              :            ', JenisKelamin[i]:2,'            |');
+            writeln('| Tanggal Periksa [DD/MM/YY] :     ', TanggalPeriksa[i]:10, '           |');
+            writeln('| Berat Badan                :         ', BeratBadan[i]:5, '            |');
+            writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
+            writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
+            writeln('+-------------------------------------------------------+');
         end;
     end;
 end;
@@ -210,26 +213,25 @@ var
 begin
 
     i := BanyakData + 1;
-    writeln('---- DATA KE-',i,'----');
-    write('No.Rekam Medis                 :');readln(NoRM[i]);
+    writeln('----------------------DATA KE-',i,'--------------');
+    write('No.Rekam Medis             : ');readln(NoRM[i]);
     NoRM[i] := UpperCase(NoRM[i]);
 
     while(NoRM[i] <> 'STOP') do
     begin
-        write('Nama                       :');readln(Nama[i]);
+        write('Nama                       : ');readln(Nama[i]);
         Nama[i] := UpperCase(Nama[i]);
-    
-        write('Jenis Kelamin [L/P]        :');readln(JenisKelamin[i]);
+        write('Jenis Kelamin [L/P]        : ');readln(JenisKelamin[i]);
         JenisKelamin[i] := UpperCase(JenisKelamin[i]);
-        write('Tanggal Periksa [DD/MM/YY] :');readln(TanggalPeriksa[i]);
-        write('Berat Badan (kg)           :');readln(BeratBadan[i]);
-        write('Tinggi Badan (cm)          :');readln(TinggiBadan[i]);
-        write('Diagnosa                   :');readln(Diagnosa[i]);
-
+        write('Tanggal Periksa [DD/MM/YY] : ');readln(TanggalPeriksa[i]);
+        write('Berat Badan (kg)           : ');readln(BeratBadan[i]);
+        write('Tinggi Badan (cm)          : ');readln(TinggiBadan[i]);
+        write('Diagnosa                   : ');readln(Diagnosa[i]);
+        JenisKelamin[i] := UpperCase(JenisKelamin[i]);
         i := i + 1;
 
-        writeln('---- DATA KE-',i,'----');
-        write('No.Rekam Medis                 :');readln(NoRM[i]);
+        writeln('----------------------DATA KE-',i,'--------------');
+        write('No.Rekam Medis             : ');readln(NoRM[i]);
         NoRM[i] := UpperCase(NoRM[i]);
     end;
     
@@ -864,7 +866,7 @@ var
 begin
     if (BanyakData = 0) then
     begin
-        writeln('Data belum ada!');    writeln('0. Keluar');
+        writeln('Data belum ada!');
 
     end
     else
@@ -921,19 +923,26 @@ end;
 
 procedure MenuPecarian(var PilihanPencarian : integer);
 begin
-    writeln ('+===========================================+');
-    writeln ('|               MENU PENCARIAN              |');
-    writeln ('+===========================================+');
-    writeln ('|            1. Cari No. Rekam Medis        |');
-    writeln ('|            2. Cari Nama                   |');
-    writeln ('|            3. Cari Jenis Kelamin          |');
-    writeln ('|            4. Cari Tanggal Periksa        |');
-    writeln ('|            5. Cari Berat Badan            |');
-    writeln ('|            6. Cari Tinggi Badan           |');
-    writeln ('|            7. Cari Diagnosis              |');
-    writeln ('|            0. Keluar                      |');
-    writeln ('+===========================================+');
-    write('Pilihan? ');readln(PilihanPencarian);
+    if(BanyakData = 0) then
+    begin
+        writeln('Belum ada data!');
+    end
+    else
+    begin
+        writeln ('+===========================================+');
+        writeln ('|               MENU PENCARIAN              |');
+        writeln ('+===========================================+');
+        writeln ('|            1. Cari No. Rekam Medis        |');
+        writeln ('|            2. Cari Nama                   |');
+        writeln ('|            3. Cari Jenis Kelamin          |');
+        writeln ('|            4. Cari Tanggal Periksa        |');
+        writeln ('|            5. Cari Berat Badan            |');
+        writeln ('|            6. Cari Tinggi Badan           |');
+        writeln ('|            7. Cari Diagnosis              |');
+        writeln ('|            0. Keluar                      |');
+        writeln ('+===========================================+');
+        write('Pilihan? ');readln(PilihanPencarian);
+    end;
 end;
 
 procedure CariNoRM(NoRM: ArrayNoRM; BanyakData: Integer);
@@ -1000,11 +1009,11 @@ begin
     write('Nama yang dicari : ');readln(DataCari);
     i := 1;
 
-    while(Nama[i] <> DataCari) and (i < MAKSDATA) do
+    while(UpperCase(Nama[i]) <> UpperCase(DataCari)) and (i < MAKSDATA) do
     begin
         i := i + 1;
     end;
-    if(Nama[i] = DataCari) then
+    if(UpperCase(Nama[i]) = UpperCase(DataCari)) then
     begin
         writeln('+-------------------------------------------------------+');
         writeln('|                 DATA PASEIN-',i,'                         |');
@@ -1210,7 +1219,13 @@ var
     TotalBerat, TotalTinggi, MaxBerat, MinBerat, MaxTinggi, MinTinggi: integer;
     RataBerat, RataTinggi: real;
 begin
-    JumlahLaki := 0;
+    if (BanyakData = 0) then
+    begin
+        writeln('Belum ada data!');
+    end
+    else
+    begin
+        JumlahLaki := 0;
     JumlahPerempuan := 0;
     TotalBerat := 0;
     TotalTinggi := 0;
@@ -1228,56 +1243,70 @@ begin
     begin
         // Hitung jumlah gender
         if (UpperCase(JenisKelamin[i]) = 'L') then
+        begin
             JumlahLaki := JumlahLaki + 1
-        else if (UpperCase(JenisKelamin[i]) = 'P') then
+        end;
+
+        if (UpperCase(JenisKelamin[i]) = 'P') then
+        begin
             JumlahPerempuan := JumlahPerempuan + 1;
+        end;
 
         // Hitung total berat dan tinggi
         TotalBerat := TotalBerat + BeratBadan[i];
         TotalTinggi := TotalTinggi + TinggiBadan[i];
 
         // Cari berat maksimum dan minimum
-        if BeratBadan[i] > MaxBerat then
+        if (BeratBadan[i] > MaxBerat) then
+        begin
             MaxBerat := BeratBadan[i];
-        if BeratBadan[i] < MinBerat then
+        end;
+        if (BeratBadan[i] < MinBerat) then
+        begin
             MinBerat := BeratBadan[i];
+        end;
 
         // Cari tinggi maksimum dan minimum
-        if TinggiBadan[i] > MaxTinggi then
+        if (TinggiBadan[i] > MaxTinggi) then
+        begin
             MaxTinggi := TinggiBadan[i];
-        if TinggiBadan[i] < MinTinggi then
+        end;
+        if (TinggiBadan[i] < MinTinggi) then
+        begin
             MinTinggi := TinggiBadan[i];
-    end;
+        end;
 
-    // Hitung rata-rata
-    if BanyakData > 0 then
-    begin
-        RataBerat := TotalBerat / BanyakData;
-        RataTinggi := TotalTinggi / BanyakData;
-    end
-    else
-    begin
-        RataBerat := 0;
-        RataTinggi := 0;
-    end;
+        // Hitung rata-rata
+        if (BanyakData > 0) then
+        begin
+            RataBerat := TotalBerat / BanyakData;
+            RataTinggi := TotalTinggi / BanyakData;
+        end
+        else
+        begin
+            RataBerat := 0;
+            RataTinggi := 0;
+        end;
 
-    // Tampilkan hasil rekap
-    writeln('+--------------------------------------------+');
-    writeln('|                  REKAP DATA                |');
-    writeln('+-------------------------+------------------+');
-    writeln('| Total Pasein            | ', BanyakData:8, '         |');
-    writeln('+-------------------------+------------------+');
-    writeln('| Jumlah Pasien Laki      | ', JumlahLaki:8, '         |');
-    writeln('| Jumlah Pasien Perempuan | ', JumlahPerempuan:8, '         |');
-    writeln('+-------------------------+------------------+');
-    writeln('| Rata-rata Berat Badan   | ', RataBerat:8:2, ' kg      |');
-    writeln('| Rata-rata Tinggi Badan  | ', RataTinggi:8:2, ' cm      |');
-    writeln('+-------------------------+------------------+');
-    writeln('| Berat Maksimum          | ', MaxBerat:8, ' kg      |');
-    writeln('| Berat Minimum           | ', MinBerat:8, ' kg      |');
-    writeln('| Tinggi Maksimum         | ', MaxTinggi:8, ' cm      |');
-    writeln('| Tinggi Minimum          | ', MinTinggi:8, ' cm      |');
-    writeln('+-------------------------+------------------+');
+        // Tampilkan hasil rekap
+        writeln('+--------------------------------------------+');
+        writeln('|                  REKAP DATA                |');
+        writeln('+-------------------------+------------------+');
+        writeln('| Total Pasein            | ', BanyakData:8, '         |');
+        writeln('+-------------------------+------------------+');
+        writeln('| Jumlah Pasien Laki      | ', JumlahLaki:8, '         |');
+        writeln('| Jumlah Pasien Perempuan | ', JumlahPerempuan:8, '         |');
+        writeln('+-------------------------+------------------+');
+        writeln('| Rata-rata Berat Badan   | ', RataBerat:8:2, ' kg      |');
+        writeln('| Rata-rata Tinggi Badan  | ', RataTinggi:8:2, ' cm      |');
+        writeln('+-------------------------+------------------+');
+        writeln('| Berat Maksimum          | ', MaxBerat:8, ' kg      |');
+        writeln('| Berat Minimum           | ', MinBerat:8, ' kg      |');
+        writeln('| Tinggi Maksimum         | ', MaxTinggi:8, ' cm      |');
+        writeln('| Tinggi Minimum          | ', MinTinggi:8, ' cm      |');
+        writeln('+-------------------------+------------------+');
+        end;
+    end;
 end;
 
 procedure PilihanCariPasien(var MetodeCariPasein : integer);
@@ -1297,6 +1326,7 @@ end;
 //Algoritma Utama
 begin
     clrscr;
+    BanyakData :=0;
     ArrayTest(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa);
     MenuPilihan(Pilihan);
     while(Pilihan <> 0) do
@@ -1310,15 +1340,13 @@ begin
                     case (PilihanPasien) of
                         1 : begin
                             clrscr;
-                            UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
-                            CariNoRM(NoRM, BanyakData);
                             PilihanCariPasien(MetodeCariPasein);
                             while(MetodeCariPasein <> 0) do
                             begin
                                 case(MetodeCariPasein) of
                                     1 : begin
                                         clrscr;
-                                        UrutNoRMDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
+                                        UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                         CariNoRM(NoRM, BanyakData);
                                     end;
                                     2 : begin
@@ -1326,6 +1354,9 @@ begin
                                         CariNama(Nama);
                                     end;
                                 end;
+                            readln;
+                            clrscr;
+                            PilihanCariPasien(MetodeCariPasein);
                             end;
                         end;
                     end;
@@ -1455,6 +1486,7 @@ begin
                             begin
                                 case (PilihanPencarian) of
                                     1 : begin
+                                        clrscr;
                                         UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                         CariNoRM(NoRM, BanyakData);
 
