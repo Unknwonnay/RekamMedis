@@ -24,7 +24,8 @@ var
     TinggiBadan : ArrayTinggi;
     Diagnosa : ArrayDiagnosa;
 
-    Pilihan,PilihanDokter,PilihanPasien, PilihanAsc, PilihanDsc,PilihanPengurutan,PilihanPencarian ,BanyakData : integer;
+    Pilihan,PilihanDokter,PilihanPasien, PilihanAsc,
+    PilihanDsc,PilihanPengurutan,PilihanPencarian ,BanyakData : integer;
 
 //Testing Array
 procedure ArrayTest(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
@@ -1183,6 +1184,85 @@ begin
 end;
 
 
+procedure RekapRekamMedis(JenisKelamin : ArrayKelamin; BeratBadan: ArrayBerat; TinggiBadan: ArrayTinggi; BanyakData: integer);
+var
+    i, JumlahLaki, JumlahPerempuan: integer;
+    TotalBerat, TotalTinggi, MaxBerat, MinBerat, MaxTinggi, MinTinggi: integer;
+    RataBerat, RataTinggi: real;
+begin
+    JumlahLaki := 0;
+    JumlahPerempuan := 0;
+    TotalBerat := 0;
+    TotalTinggi := 0;
+    
+    // Inisialisasi nilai max dan min dengan data pertama jika ada
+    if BanyakData > 0 then
+    begin
+        MaxBerat := BeratBadan[1];
+        MinBerat := BeratBadan[1];
+        MaxTinggi := TinggiBadan[1];
+        MinTinggi := TinggiBadan[1];
+    end;
+
+    for i := 1 to BanyakData do
+    begin
+        // Hitung jumlah gender
+        if (UpperCase(JenisKelamin[i]) = 'L') then
+            JumlahLaki := JumlahLaki + 1
+        else if (UpperCase(JenisKelamin[i]) = 'P') then
+            JumlahPerempuan := JumlahPerempuan + 1;
+
+        // Hitung total berat dan tinggi
+        TotalBerat := TotalBerat + BeratBadan[i];
+        TotalTinggi := TotalTinggi + TinggiBadan[i];
+
+        // Cari berat maksimum dan minimum
+        if BeratBadan[i] > MaxBerat then
+            MaxBerat := BeratBadan[i];
+        if BeratBadan[i] < MinBerat then
+            MinBerat := BeratBadan[i];
+
+        // Cari tinggi maksimum dan minimum
+        if TinggiBadan[i] > MaxTinggi then
+            MaxTinggi := TinggiBadan[i];
+        if TinggiBadan[i] < MinTinggi then
+            MinTinggi := TinggiBadan[i];
+    end;
+
+    // Hitung rata-rata
+    if BanyakData > 0 then
+    begin
+        RataBerat := TotalBerat / BanyakData;
+        RataTinggi := TotalTinggi / BanyakData;
+    end
+    else
+    begin
+        RataBerat := 0;
+        RataTinggi := 0;
+    end;
+
+    // Tampilkan hasil rekap
+    writeln('+--------------------------------------------+');
+    writeln('|                  REKAP DATA                |');
+    writeln('+-------------------------+------------------+');
+    writeln('| Total Pasein            | ', BanyakData:8, '         |');
+    writeln('+-------------------------+------------------+');
+    writeln('| Jumlah Pasien Laki      | ', JumlahLaki:8, '         |');
+    writeln('| Jumlah Pasien Perempuan | ', JumlahPerempuan:8, '         |');
+    writeln('+-------------------------+------------------+');
+    writeln('| Rata-rata Berat Badan   | ', RataBerat:8:2, ' kg      |');
+    writeln('| Rata-rata Tinggi Badan  | ', RataTinggi:8:2, '   cm    |');
+    writeln('+-------------------------+------------------+');
+    writeln('| Berat Maksimum          | ', MaxBerat:8, ' kg      |');
+    writeln('| Berat Minimum           | ', MinBerat:8, ' kg      |');
+    writeln('| Tinggi Maksimum         | ', MaxTinggi:8, ' cm      |');
+    writeln('| Tinggi Minimum          | ', MinTinggi:8, ' cm      |');
+    writeln('+-------------------------+------------------+');
+end;
+
+
+
+
 //Algoritma Utama
 begin
     clrscr;
@@ -1380,7 +1460,8 @@ begin
                             writeln('Semua data telah dihancurkan');
                         end;
                         8: begin
-                            writeln('REKAP REKAM MEDIS');
+                            clrscr;
+                            RekapRekamMedis(JenisKelamin, BeratBadan, TinggiBadan, BanyakData);
                         end;
                     end;
                 readln;
