@@ -46,8 +46,8 @@ begin
     Nama[2]             := 'Yanto';
     JenisKelamin[2]     := 'L';
     TanggalPeriksa[2]   := '120225';
-    BeratBadan[2]       := 80;
-    TinggiBadan[2]      := 160;
+    BeratBadan[2]       := 60;
+    TinggiBadan[2]      := 150;
     Diagnosa[2]         := 'Demam';
 
     //array 3
@@ -205,37 +205,41 @@ begin
 end;
 
 
-procedure IsiData(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
-                    var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
-                    var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa; var BanyakData : integer );
+procedure IsiData(var NoRM: ArrayNoRM; var Nama: ArrayNama; var JenisKelamin: ArrayKelamin; 
+                  var TanggalPeriksa: ArrayTanggal; var BeratBadan: ArrayBerat; 
+                  var TinggiBadan: ArrayTinggi; var Diagnosa: ArrayDiagnosa; var BanyakData: integer);
 var
-    i : integer;
+    i: integer;
 begin
-
     i := BanyakData + 1;
-    writeln('----------------------DATA KE-',i,'--------------');
-    write('No.Rekam Medis             : ');readln(NoRM[i]);
-    NoRM[i] := UpperCase(NoRM[i]);
 
-    while(NoRM[i] <> 'STOP') do
+    while (i <= 10) and (NoRM[i] <> 'STOP') do
     begin
-        write('Nama                       : ');readln(Nama[i]);
-        Nama[i] := UpperCase(Nama[i]);
-        write('Jenis Kelamin [L/P]        : ');readln(JenisKelamin[i]);
-        JenisKelamin[i] := UpperCase(JenisKelamin[i]);
-        write('Tanggal Periksa [DD/MM/YY] : ');readln(TanggalPeriksa[i]);
-        write('Berat Badan (kg)           : ');readln(BeratBadan[i]);
-        write('Tinggi Badan (cm)          : ');readln(TinggiBadan[i]);
-        write('Diagnosa                   : ');readln(Diagnosa[i]);
-        JenisKelamin[i] := UpperCase(JenisKelamin[i]);
-        i := i + 1;
-
-        writeln('----------------------DATA KE-',i,'--------------');
-        write('No.Rekam Medis             : ');readln(NoRM[i]);
+        writeln('----------------------DATA KE-', i, '--------------');
+        write('No.Rekam Medis             : '); readln(NoRM[i]);
         NoRM[i] := UpperCase(NoRM[i]);
+
+        if NoRM[i] = 'STOP' then
+            break;
+
+        write('Nama                       : '); readln(Nama[i]);
+        Nama[i] := UpperCase(Nama[i]);
+        write('Jenis Kelamin [L/P]        : '); readln(JenisKelamin[i]);
+        JenisKelamin[i] := UpperCase(JenisKelamin[i]);
+        write('Tanggal Periksa [DD/MM/YY] : '); readln(TanggalPeriksa[i]);
+        write('Berat Badan (kg)           : '); readln(BeratBadan[i]);
+        write('Tinggi Badan (cm)          : '); readln(TinggiBadan[i]);
+        write('Diagnosa                   : '); readln(Diagnosa[i]);
+
+        i := i + 1;
     end;
-    
-    BanyakData := i-1;
+
+    if i > 10 then
+    begin
+        writeln('Data sudah mencapai batas maksimum (10 entri).');
+    end;
+
+    BanyakData := i - 1; // Update jumlah data yang berhasil dimasukkan
 end;
 
 procedure EditData(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
@@ -479,95 +483,99 @@ begin
     end;
 end;
 
+//Minimum Sort Asc
 procedure UrutBeratBadanAsc(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
             var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
             var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa; N : integer);
 var
-    i,j,TempInt : integer;
+    i,j,TempInt, min: integer;
     TempStr : string;
 begin
     for i := 1 to N-1 do
     begin
-        for j := N downto i+1 do
+        min := i;
+        for j := i + 1 to N do
         begin
-            if(BeratBadan[j] < BeratBadan[j-1]) then
+            if(BeratBadan[j] < BeratBadan[min]) then
             begin
-                TempStr := Nama[j];
-                Nama[j] := Nama[j-1];
-                Nama[j-1] := TempStr;
-
-                TempStr := NoRM[j];
-                NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempStr;
-                
-                TempStr := JenisKelamin[j];
-                JenisKelamin[j] := JenisKelamin[j-1];
-                JenisKelamin[j-1] := TempStr;
-
-                TempStr := TanggalPeriksa[j];
-                TanggalPeriksa[j] := TanggalPeriksa[j-1];
-                TanggalPeriksa[j-1] := TempStr;
-
-                TempInt := BeratBadan[j];
-                BeratBadan[j] := BeratBadan[j-1];
-                BeratBadan[j-1] := TempInt;
-
-                TempInt := TinggiBadan[j];
-                TinggiBadan[j] := TinggiBadan[j-1];
-                TinggiBadan[j-1] := TempInt;
-
-                TempStr := Diagnosa[j];
-                Diagnosa[j] := Diagnosa[j-1];
-                Diagnosa[j-1] := TempStr;
-
+                min := j;
             end;
         end;
+    TempStr := Nama[min];
+    Nama[min] := Nama[i];
+    Nama[i] := TempStr;
+
+    TempStr := NoRM[min];
+    NoRM[min] := NoRM[i];
+    NoRM[i] := TempStr;
+    
+    TempStr := JenisKelamin[min];
+    JenisKelamin[min] := JenisKelamin[i];
+    JenisKelamin[i] := TempStr;
+
+    TempStr := TanggalPeriksa[min];
+    TanggalPeriksa[min] := TanggalPeriksa[i];
+    TanggalPeriksa[i] := TempStr;
+
+    TempInt := BeratBadan[min];
+    BeratBadan[min] := BeratBadan[i];
+    BeratBadan[i] := TempInt;
+
+    TempInt := TinggiBadan[min];
+    TinggiBadan[min] := TinggiBadan[i];
+    TinggiBadan[i] := TempInt;
+
+    TempStr := Diagnosa[min];
+    Diagnosa[min] := Diagnosa[i];
+    Diagnosa[i] := TempStr;
     end;
 end;
 
+//Maximum Sort Asc
 procedure UrutTinggiBadanAsc(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
             var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
             var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa; N : integer);
 var
-    i,j,TempInt : integer;
+    i,j,TempInt, max : integer;
     TempStr : string;
 begin
     for i := 1 to N-1 do
     begin
-        for j := N downto i+1 do
+        max := 1;
+        for j := 2 to (N+1) - i do
         begin
-            if(TinggiBadan[j] < TinggiBadan[j-1]) then
+            if(TinggiBadan[j] > TinggiBadan[max]) then
             begin
-                TempStr := Nama[j];
-                Nama[j] := Nama[j-1];
-                Nama[j-1] := TempStr;
-
-                TempStr := NoRM[j];
-                NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempStr;
-                
-                TempStr := JenisKelamin[j];
-                JenisKelamin[j] := JenisKelamin[j-1];
-                JenisKelamin[j-1] := TempStr;
-
-                TempStr := TanggalPeriksa[j];
-                TanggalPeriksa[j] := TanggalPeriksa[j-1];
-                TanggalPeriksa[j-1] := TempStr;
-
-                TempInt := BeratBadan[j];
-                BeratBadan[j] := BeratBadan[j-1];
-                BeratBadan[j-1] := TempInt;
-
-                TempInt := TinggiBadan[j];
-                TinggiBadan[j] := TinggiBadan[j-1];
-                TinggiBadan[j-1] := TempInt;
-
-                TempStr := Diagnosa[j];
-                Diagnosa[j] := Diagnosa[j-1];
-                Diagnosa[j-1] := TempStr;
-
+                max := j;
             end;
         end;
+    TempStr := Nama[max];
+    Nama[max] := Nama[j];
+    Nama[j] := TempStr;
+
+    TempStr := NoRM[max];
+    NoRM[max] := NoRM[j];
+    NoRM[j] := TempStr;
+    
+    TempStr := JenisKelamin[max];
+    JenisKelamin[max] := JenisKelamin[j];
+    JenisKelamin[j] := TempStr;
+
+    TempStr := TanggalPeriksa[max];
+    TanggalPeriksa[max] := TanggalPeriksa[j];
+    TanggalPeriksa[j] := TempStr;
+
+    TempInt := BeratBadan[max];
+    BeratBadan[max] := BeratBadan[j];
+    BeratBadan[j] := TempInt;
+
+    TempInt := TinggiBadan[max];
+    TinggiBadan[max] := TinggiBadan[j];
+    TinggiBadan[j] := TempInt;
+
+    TempStr := Diagnosa[max];
+    Diagnosa[max] := Diagnosa[j];
+    Diagnosa[j] := TempStr;
     end;
 end;
 
@@ -712,95 +720,104 @@ begin
     end;
 end;
 
+//Maximum Sort Desc
 procedure UrutBeratBadanDsc(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
             var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
             var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa; N : integer);
 var
-    i,j,TempInt : integer;
+    i, j, max, TempInt : integer;
     TempStr : string;
 begin
     for i := 1 to N-1 do
     begin
-        for j := N downto i+1 do
+        max := i;
+        for j := i+1 to N do
         begin
-            if(BeratBadan[j] > BeratBadan[j-1]) then
+            if (BeratBadan[j] > BeratBadan[max]) then
             begin
-                TempStr := Nama[j];
-                Nama[j] := Nama[j-1];
-                Nama[j-1] := TempStr;
-
-                TempStr := NoRM[j];
-                NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempStr;
-                
-                TempStr := JenisKelamin[j];
-                JenisKelamin[j] := JenisKelamin[j-1];
-                JenisKelamin[j-1] := TempStr;
-
-                TempStr := TanggalPeriksa[j];
-                TanggalPeriksa[j] := TanggalPeriksa[j-1];
-                TanggalPeriksa[j-1] := TempStr;
-
-                TempInt := BeratBadan[j];
-                BeratBadan[j] := BeratBadan[j-1];
-                BeratBadan[j-1] := TempInt;
-
-                TempInt := TinggiBadan[j];
-                TinggiBadan[j] := TinggiBadan[j-1];
-                TinggiBadan[j-1] := TempInt;
-
-                TempStr := Diagnosa[j];
-                Diagnosa[j] := Diagnosa[j-1];
-                Diagnosa[j-1] := TempStr;
-
+                max := j;
             end;
+        end;
+
+        // Swap data jika max berbeda dari i
+        if (max <> i) then
+        begin
+            TempStr := Nama[i];
+            Nama[i] := Nama[max];
+            Nama[max] := TempStr;
+
+            TempStr := NoRM[i];
+            NoRM[i] := NoRM[max];
+            NoRM[max] := TempStr;
+                
+            TempStr := JenisKelamin[i];
+            JenisKelamin[i] := JenisKelamin[max];
+            JenisKelamin[max] := TempStr;
+
+            TempStr := TanggalPeriksa[i];
+            TanggalPeriksa[i] := TanggalPeriksa[max];
+            TanggalPeriksa[max] := TempStr;
+
+            TempInt := BeratBadan[i];
+            BeratBadan[i] := BeratBadan[max];
+            BeratBadan[max] := TempInt;
+
+            TempInt := TinggiBadan[i];
+            TinggiBadan[i] := TinggiBadan[max];
+            TinggiBadan[max] := TempInt;
+
+            TempStr := Diagnosa[i];
+            Diagnosa[i] := Diagnosa[max];
+            Diagnosa[max] := TempStr;
         end;
     end;
 end;
 
+//Minimum Sort Desc
 procedure UrutTinggiBadanDsc(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
             var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
             var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa; N : integer);
 var
-    i,j,TempInt : integer;
+    i,j,TempInt, max : integer;
     TempStr : string;
 begin
     for i := 1 to N-1 do
     begin
-        for j := 1 to N-i do
+        max := 1;
+        for j := 2 to (N+1) - i do
         begin
-            if(TinggiBadan[j] > TinggiBadan[j-1]) then
+            if(TinggiBadan[j] < TinggiBadan[max]) then
             begin
-                TempStr := Nama[j];
-                Nama[j] := Nama[j-1];
-                Nama[j-1] := TempStr;
-
-                TempStr := NoRM[j];
-                NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempStr;
-                
-                TempStr := JenisKelamin[j];
-                JenisKelamin[j] := JenisKelamin[j-1];
-                JenisKelamin[j-1] := TempStr;
-
-                TempStr := TanggalPeriksa[j];
-                TanggalPeriksa[j] := TanggalPeriksa[j-1];
-                TanggalPeriksa[j-1] := TempStr;
-
-                TempInt := BeratBadan[j];
-                BeratBadan[j] := BeratBadan[j-1];
-                BeratBadan[j-1] := TempInt;
-
-                TempInt := TinggiBadan[j];
-                TinggiBadan[j] := TinggiBadan[j-1];
-                TinggiBadan[j-1] := TempInt;
-
-                TempStr := Diagnosa[j];
-                Diagnosa[j] := Diagnosa[j-1];
-                Diagnosa[j-1] := TempStr;
-
+                max := j;
             end;
         end;
+    TempStr := Nama[max];
+    Nama[max] := Nama[j];
+    Nama[j] := TempStr;
+
+    TempStr := NoRM[max];
+    NoRM[max] := NoRM[j];
+    NoRM[j] := TempStr;
+    
+    TempStr := JenisKelamin[max];
+    JenisKelamin[max] := JenisKelamin[j];
+    JenisKelamin[j] := TempStr;
+
+    TempStr := TanggalPeriksa[max];
+    TanggalPeriksa[max] := TanggalPeriksa[j];
+    TanggalPeriksa[j] := TempStr;
+
+    TempInt := BeratBadan[max];
+    BeratBadan[max] := BeratBadan[j];
+    BeratBadan[j] := TempInt;
+
+    TempInt := TinggiBadan[max];
+    TinggiBadan[max] := TinggiBadan[j];
+    TinggiBadan[j] := TempInt;
+
+    TempStr := Diagnosa[max];
+    Diagnosa[max] := Diagnosa[j];
+    Diagnosa[j] := TempStr;
     end;
 end;
 
@@ -827,31 +844,31 @@ end;
 
 procedure MenuSortingAsc(var PilihanAsc : integer);
 begin
-    writeln ('+=========================================+');
-    writeln ('|       MENGURUTKAN DATA SECARA ASC       |');
-    writeln ('+=========================================+');
-    writeln ('|            1. No. Rekam Medis           |');
-    writeln ('|            2. Nama                      |');
-    writeln ('|            3. Tanggal Periksa           |');
-    writeln ('|            4. Berat Badan               |');
-    writeln ('|            5. Tinggi Badan              |');
-    writeln ('|            0. Keluar                    |');
-    writeln ('+=========================================+');
+    writeln ('+===========================================+');
+    writeln ('|       MENGURUTKAN DATA SECARA MENAIK      |');
+    writeln ('+===========================================+');
+    writeln ('|            1. No. Rekam Medis             |');
+    writeln ('|            2. Nama                        |');
+    writeln ('|            3. Tanggal Periksa             |');
+    writeln ('|            4. Berat Badan                 |');
+    writeln ('|            5. Tinggi Badan                |');
+    writeln ('|            0. Keluar                      |');
+    writeln ('+===========================================+');
     write('Pilihan? ');readln(PilihanAsc);
 end;
 
 procedure MenuSortingDsc(var PilihanDsc : integer);
 begin
-    writeln ('+=========================================+');
-    writeln ('|       MENGURUTKAN DATA SECARA ASC       |');
-    writeln ('+=========================================+');
-    writeln ('|            1. No. Rekam Medis           |');
-    writeln ('|            2. Nama                      |');
-    writeln ('|            3. Tanggal Periksa           |');
-    writeln ('|            4. Berat Badan               |');
-    writeln ('|            5. Tinggi Badan              |');
-    writeln ('|            0. Keluar                    |');
-    writeln ('+=========================================+');
+    writeln ('+============================================+');
+    writeln ('|       MENGURUTKAN DATA SECARA MENURUN      |');
+    writeln ('+============================================+');
+    writeln ('|            1. No. Rekam Medis              |');
+    writeln ('|            2. Nama                         |');
+    writeln ('|            3. Tanggal Periksa              |');
+    writeln ('|            4. Berat Badan                  |');
+    writeln ('|            5. Tinggi Badan                 |');
+    writeln ('|            0. Keluar                       |');
+    writeln ('+============================================+');
     write('Pilihan? ');readln(PilihanDsc);
 end;
 
@@ -1174,8 +1191,6 @@ begin
     end;
 end;
 
-
-
 procedure CariDiagnosa(var Diagnosa : ArrayDiagnosa);
 var
     i : integer;
@@ -1287,7 +1302,7 @@ begin
             RataBerat := 0;
             RataTinggi := 0;
         end;
-
+        clrscr;
         // Tampilkan hasil rekap
         writeln('+--------------------------------------------+');
         writeln('|                  REKAP DATA                |');
@@ -1332,7 +1347,7 @@ end;
 //Algoritma Utama
 begin
     clrscr;
-    BanyakData :=0;
+    BanyakData := 0;
     ArrayTest(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa);
     MenuPilihan(Pilihan);
     while(Pilihan <> 0) do
@@ -1360,13 +1375,11 @@ begin
                                         CariNama(Nama);
                                     end;
                                 end;
-                            readln;
                             clrscr;
                             PilihanCariPasien(MetodeCariPasein);
                             end;
                         end;
                     end;
-                readln;
                 clrscr;
                 MenuPasien(PilihanPasien);
                 end;
@@ -1385,11 +1398,11 @@ begin
                         2 : begin
                             clrscr;
                             TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
+                            readln;
                         end;
                         3: begin
                             clrscr;
                             EditData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
-
                         end;
                         4: begin
                             clrscr;
@@ -1407,34 +1420,38 @@ begin
                                                     clrscr;
                                                     UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                                     TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
+                                                    readln;
 
                                                 end;
                                                 2 : begin
                                                     clrscr;
                                                     UrutNamaAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                                     TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
+                                                    readln;
 
                                                 end;
                                                 3 : begin
                                                     clrscr;
                                                     UrutTanggalPeriksaAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                                     TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
+                                                    readln;
 
                                                 end;
                                                 4 : begin
                                                     clrscr;
                                                     UrutBeratBadanAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                                     TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
+                                                    readln;
 
                                                 end;
                                                 5 : begin
                                                     clrscr;
                                                     UrutTinggiBadanAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                                     TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
+                                                    readln;
 
                                                 end;
                                             end;
-                                        readln;
                                         clrscr;
                                         MenuSortingAsc(PilihanAsc);
                                         end;
@@ -1449,30 +1466,36 @@ begin
                                                     clrscr;
                                                     UrutNoRMDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                                     TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
+                                                    readln;
+
 
                                                 end;
                                                 2 : begin
                                                     clrscr;
                                                     UrutNamaDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                                     TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
-                                                    
+                                                    readln;
+
                                                 end;
                                                 3 : begin
                                                     clrscr;
                                                     UrutTanggalPeriksaDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                                     TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
+                                                    readln;
 
                                                 end;
                                                 4 : begin
                                                     clrscr;
                                                     UrutBeratBadanDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                                     TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
+                                                    readln;
 
                                                 end;
                                                 5 : begin
                                                     clrscr;
                                                     UrutTinggiBadanDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                                     TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData );
+                                                    readln;
 
                                                 end;
                                             end;
@@ -1495,37 +1518,44 @@ begin
                                         clrscr;
                                         UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                                         CariNoRM(NoRM, BanyakData);
+                                        readln;
 
                                     end;
                                     2 : begin
                                         clrscr;
                                         CariNama(Nama);
+                                        readln;
 
                                     end;
                                     3 : begin
                                         clrscr;
                                         CariJenisKelamin(JenisKelamin);
-                                        
+                                        readln;
+
                                     end;
                                     4 : begin
                                         clrscr;
                                         CariTanggalPeriksa(TanggalPeriksa);
-                                        
+                                        readln;
+
                                     end;
                                     5 : begin
                                         clrscr;
                                         CariBeratBadan(BeratBadan);
-                                        
+                                        readln;
+
                                     end;
                                     6 : begin
                                         clrscr;
-                                        CariTinggiBadan(TInggiBadan);
-                                        
+                                        CariTinggiBadan(TinggiBadan);
+                                        readln;
+
                                     end;
                                     7 : begin
                                         clrscr;
                                         CariDiagnosa(Diagnosa);
-                                        
+                                        readln;
+
                                     end;
                                 end;
                             readln;
@@ -1536,19 +1566,21 @@ begin
                         6: begin
                             clrscr;
                             PenghapusanData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
+                            readln;
                         end;
                         7: begin
                             clrscr;
                             PenghancuranArray(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa);
                             BanyakData := 0;
                             writeln('Semua data telah dihancurkan');
+                            readln;
                         end;
                         8: begin
                             clrscr;
                             RekapRekamMedis(JenisKelamin, BeratBadan, TinggiBadan, BanyakData);
+                            readln;
                         end;
                     end;
-                readln;
                 clrscr;
                 MenuDokter( PilihanDokter);
                 end;
