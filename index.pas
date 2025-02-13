@@ -33,7 +33,7 @@ procedure ArrayTest(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin
                             var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa );
 begin
     //array 1
-    NoRM[1]             := '1';
+    (* NoRM[1]             := '1';
     Nama[1]             := 'Budi';
     JenisKelamin[1]     := 'L';
     TanggalPeriksa[1]   := '120225';
@@ -59,7 +59,7 @@ begin
     TinggiBadan[3]      := 160;
     Diagnosa[3]         := 'Diare';
 
-    BanyakData := 3;
+    BanyakData := 3; *)
 end;
 
 procedure PenghancuranArray(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
@@ -1311,15 +1311,21 @@ end;
 
 procedure PilihanCariPasien(var MetodeCariPasein : integer);
 begin
-    writeln ('+================================+');
-    writeln ('|          MENU PASIEN           |');
-    writeln ('+================================+');
-    writeln ('|       1. Cari Rekam Medis      |');
-    writeln ('|       2. Cari Nama             |');
-    writeln ('|       0. Keluar                |');
-    writeln ('+================================+');
-    write('Pilihan? ');readln(MetodeCariPasein);
-
+    if(BanyakData = 0) then
+    begin
+        writeln('Belum ada data!');
+    end
+    else
+    begin
+        writeln ('+================================+');
+        writeln ('|          MENU PASIEN           |');
+        writeln ('+================================+');
+        writeln ('|       1. Cari Rekam Medis      |');
+        writeln ('|       2. Cari Nama             |');
+        writeln ('|       0. Keluar                |');
+        writeln ('+================================+');
+        write('Pilihan? ');readln(MetodeCariPasein);
+    end;
 end;
 
 
