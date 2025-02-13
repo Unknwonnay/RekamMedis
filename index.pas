@@ -6,7 +6,7 @@ const
     MAKSDATA = 10;
 
 type
-    ArrayNoRM     = array[1..MAKSDATA] of integer;
+    ArrayNoRM     = array[1..MAKSDATA] of string;
     ArrayNama     = array[1..MAKSDATA] of string;
     ArrayKelamin  = array[1..MAKSDATA] of string;
     ArrayTanggal  = array[1..MAKSDATA] of string;
@@ -32,7 +32,7 @@ procedure ArrayTest(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin
                             var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa );
 begin
     //array 1
-    NoRM[1]             := 1;
+    NoRM[1]             := '1';
     Nama[1]             := 'Budi';
     JenisKelamin[1]     := 'L';
     TanggalPeriksa[1]   := '120225';
@@ -41,7 +41,7 @@ begin
     Diagnosa[1]         := 'Demam';
 
     //array 2
-    NoRM[2]             := 2;
+    NoRM[2]             := '2';
     Nama[2]             := 'Yanto';
     JenisKelamin[2]     := 'L';
     TanggalPeriksa[2]   := '120225';
@@ -50,7 +50,7 @@ begin
     Diagnosa[2]         := 'Demam';
 
     //array 3
-    NoRM[3]             := 3;
+    NoRM[3]             := '3';
     Nama[3]             := 'Gusti';
     JenisKelamin[3]     := 'L';
     TanggalPeriksa[3]   := '120225';
@@ -69,7 +69,7 @@ var
 begin
     for i := 1 to MAKSDATA do
     begin
-        NoRm[i]           := 0;
+        NoRm[i]           := '/';
         Nama[i]           := '/';
         JenisKelamin[i]   := '/';
         TanggalPeriksa[i] := '/';
@@ -180,6 +180,7 @@ begin
     end;
 end;
 
+
 procedure IsiData(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
                     var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
                     var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa; var BanyakData : integer );
@@ -189,11 +190,14 @@ begin
 
     i := BanyakData + 1;
     writeln('---- DATA KE-',i,'----');
-    write('Nama                       :');readln(Nama[i]);
-    Nama[i] := UpperCase(Nama[i]);
+    write('No.Rekam Medis                 :');readln(NoRM[i]);
+    NoRM[i] := UpperCase(NoRM[i]);
 
-    while(Nama[i] <> 'STOP') do
+    while(NoRM[i] <> 'STOP') do
     begin
+        write('Nama                       :');readln(Nama[i]);
+        Nama[i] := UpperCase(Nama[i]);
+    
         write('Jenis Kelamin [L/P]        :');readln(JenisKelamin[i]);
         JenisKelamin[i] := UpperCase(JenisKelamin[i]);
         write('Tanggal Periksa [DD/MM/YY] :');readln(TanggalPeriksa[i]);
@@ -201,12 +205,11 @@ begin
         write('Tinggi Badan (cm)          :');readln(TinggiBadan[i]);
         write('Diagnosa                   :');readln(Diagnosa[i]);
 
-        NoRM[i] := i;
         i := i + 1;
 
         writeln('---- DATA KE-',i,'----');
-        write('Nama                       :');readln(Nama[i]);
-        Nama[i] := UpperCase(Nama[i]);
+        write('No.Rekam Medis                 :');readln(NoRM[i]);
+        NoRM[i] := UpperCase(NoRM[i]);
     end;
     
     BanyakData := i-1;
@@ -324,9 +327,9 @@ begin
         begin
             if(NoRM[j] < NoRM[j-1]) then
             begin
-                TempInt := NoRM[j];
+                TempStr := NoRM[j];
                 NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempInt;
+                NoRM[j-1] := TempStr;
                 
                 TempStr := Nama[j];
                 Nama[j] := Nama[j-1];
@@ -375,9 +378,9 @@ begin
                 Nama[j] := Nama[j-1];
                 Nama[j-1] := TempStr;
 
-                TempInt := NoRM[j];
+                TempStr := NoRM[j];
                 NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempInt;
+                NoRM[j-1] := TempStr;
                 
                 TempStr := JenisKelamin[j];
                 JenisKelamin[j] := JenisKelamin[j-1];
@@ -422,9 +425,9 @@ begin
                 Nama[j] := Nama[j-1];
                 Nama[j-1] := TempStr;
 
-                TempInt := NoRM[j];
+                TempStr := NoRM[j];
                 NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempInt;
+                NoRM[j-1] := TempStr;
                 
                 TempStr := JenisKelamin[j];
                 JenisKelamin[j] := JenisKelamin[j-1];
@@ -468,9 +471,9 @@ begin
                 Nama[j] := Nama[j-1];
                 Nama[j-1] := TempStr;
 
-                TempInt := NoRM[j];
+                TempStr := NoRM[j];
                 NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempInt;
+                NoRM[j-1] := TempStr;
                 
                 TempStr := JenisKelamin[j];
                 JenisKelamin[j] := JenisKelamin[j-1];
@@ -514,9 +517,9 @@ begin
                 Nama[j] := Nama[j-1];
                 Nama[j-1] := TempStr;
 
-                TempInt := NoRM[j];
+                TempStr := NoRM[j];
                 NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempInt;
+                NoRM[j-1] := TempStr;
                 
                 TempStr := JenisKelamin[j];
                 JenisKelamin[j] := JenisKelamin[j-1];
@@ -558,9 +561,9 @@ begin
         begin
             if(NoRM[j] > NoRM[j-1]) then
             begin
-                TempInt := NoRM[j];
+                TempStr := NoRM[j];
                 NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempInt;
+                NoRM[j-1] := TempStr;
                 
                 TempStr := Nama[j];
                 Nama[j] := Nama[j-1];
@@ -608,9 +611,9 @@ begin
                 Nama[j] := Nama[j-1];
                 Nama[j-1] := TempStr;
 
-                TempInt := NoRM[j];
+                TempStr := NoRM[j];
                 NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempInt;
+                NoRM[j-1] := TempStr;
                 
                 TempStr := JenisKelamin[j];
                 JenisKelamin[j] := JenisKelamin[j-1];
@@ -655,9 +658,9 @@ begin
                 Nama[j] := Nama[j-1];
                 Nama[j-1] := TempStr;
 
-                TempInt := NoRM[j];
+                TempStr := NoRM[j];
                 NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempInt;
+                NoRM[j-1] := TempStr;
                 
                 TempStr := JenisKelamin[j];
                 JenisKelamin[j] := JenisKelamin[j-1];
@@ -701,9 +704,9 @@ begin
                 Nama[j] := Nama[j-1];
                 Nama[j-1] := TempStr;
 
-                TempInt := NoRM[j];
+                TempStr := NoRM[j];
                 NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempInt;
+                NoRM[j-1] := TempStr;
                 
                 TempStr := JenisKelamin[j];
                 JenisKelamin[j] := JenisKelamin[j-1];
@@ -747,9 +750,9 @@ begin
                 Nama[j] := Nama[j-1];
                 Nama[j-1] := TempStr;
 
-                TempInt := NoRM[j];
+                TempStr := NoRM[j];
                 NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempInt;
+                NoRM[j-1] := TempStr;
                 
                 TempStr := JenisKelamin[j];
                 JenisKelamin[j] := JenisKelamin[j-1];
@@ -857,7 +860,7 @@ begin
                     Diagnosa[indeks - 1]       := Diagnosa[indeks];
                 end;
                 // Set elemen terakhir ke 0 (opsional, tergantung kebutuhan)
-                NoRM[BanyakData] := 0;
+                NoRM[BanyakData] := '/';
                 Nama[BanyakData] := '/';
                 JenisKelamin[BanyakData] := '/';
                 TanggalPeriksa[BanyakData] := '/';
@@ -895,13 +898,14 @@ end;
 
 procedure CariNoRM(NoRM: ArrayNoRM; BanyakData: Integer);
 var
-    Ia, Ib, K, DataCari: Integer;
+    Ia, Ib, K : Integer;
+    DataCari : string;
     Ketemu: Boolean;
 begin
     // Pastikan array NoRM sudah terurut
     UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
 
-    write('Data yang dicari: '); readln(DataCari);
+    write('No. Rekam Medis yang dicari: '); readln(DataCari);
 
     Ia := 1; // Indeks awal
     Ib := BanyakData; // Indeks akhir
@@ -931,12 +935,208 @@ begin
     if (Ketemu) then
     begin
         writeln(DataCari, ' Ditemukan pada indeks ke-', K);
+        writeln('------------DATA KE-',K,'---------------------');
+        writeln('No. Rekam Medis            : ',NoRM[K]);
+        writeln('Nama                       : ',Nama[K]);
+        writeln('Jenis Kelamin              : ',JenisKelamin[K]);
+        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[K]);
+        writeln('Berat Badan                : ',BeratBadan[K]);
+        writeln('Tinggi Badan               : ',TinggiBadan[K]);
+        writeln('Diagnosa                   : ',Diagnosa[K]);
     end
     else
     begin
         writeln(DataCari, ' tidak ditemukan');
     end;
 end;
+
+procedure CariNama(var Nama : ArrayNama);
+var
+    i : integer;
+    DataCari : string;
+begin
+    write('Nama yang dicari : ');readln(DataCari);
+    i := 1;
+
+    while(Nama[i] <> DataCari) and (i < MAKSDATA) do
+    begin
+        i := i + 1;
+    end;
+    if(Nama[i] = DataCari) then
+    begin
+        writeln(DataCari,'Ditemukan pada indeks ke-',i);
+        writeln('------------DATA KE-',i,'---------------------');
+        writeln('No. Rekam Medis            : ',NoRM[i]);
+        writeln('Nama                       : ',Nama[i]);
+        writeln('Jenis Kelamin              : ',JenisKelamin[i]);
+        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
+        writeln('Berat Badan                : ',BeratBadan[i]);
+        writeln('Tinggi Badan               : ',TinggiBadan[i]);
+        writeln('Diagnosa                   : ',Diagnosa[i]);
+    end
+    else
+    begin
+        writeln(DataCari,'Tidak ditemukan');
+        
+    end;
+end;
+
+procedure CariJenisKelamin(var JenisKelamin : ArrayKelamin);
+var
+    i : integer;
+    DataCari : string;
+    Ditemukan : boolean; // Variabel untuk menandai apakah data ditemukan
+begin
+    write('Jenis Kelamin yang dicari : '); readln(DataCari);
+    Ditemukan := false; // Awalnya asumsikan data tidak ditemukan
+
+    for i := 1 to MAKSDATA do // Periksa semua data dalam array
+    begin
+        if JenisKelamin[i] = DataCari then
+        begin
+            Ditemukan := true; // Data ditemukan
+            writeln('------------DATA KE-', i, '---------------------');
+            writeln('No. Rekam Medis            : ', NoRM[i]);
+            writeln('Nama                       : ', Nama[i]);
+            writeln('Jenis Kelamin              : ', JenisKelamin[i]);
+            writeln('Tanggal Periksa [DD/MM/YY] : ', TanggalPeriksa[i]);
+            writeln('Berat Badan                : ', BeratBadan[i]);
+            writeln('Tinggi Badan               : ', TinggiBadan[i]);
+            writeln('Diagnosa                   : ', Diagnosa[i]);
+            writeln; // Beri jarak antar data
+        end;
+    end;
+
+    if not Ditemukan then
+    begin
+        writeln(DataCari, ' Tidak ditemukan');
+    end;
+end;
+
+procedure CariTanggalPeriksa(var TanggalPeriksa : ArrayTanggal);
+var
+    i : integer;
+    DataCari : string;
+begin
+    write('Tanggal Periksa yang dicari : ');readln(DataCari);
+    i := 1;
+
+    while(TanggalPeriksa[i] <> DataCari) and (i < MAKSDATA) do
+    begin
+        i := i + 1;
+    end;
+    if(TanggalPeriksa[i] = DataCari) then
+    begin
+        writeln(DataCari,'Ditemukan pada indeks ke-',i);
+        writeln('------------DATA KE-',i,'---------------------');
+        writeln('No. Rekam Medis            : ',NoRM[i]);
+        writeln('Nama                       : ',Nama[i]);
+        writeln('Jenis Kelamin              : ',JenisKelamin[i]);
+        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
+        writeln('Berat Badan                : ',BeratBadan[i]);
+        writeln('Tinggi Badan               : ',TinggiBadan[i]);
+        writeln('Diagnosa                   : ',Diagnosa[i]);
+    end
+    else
+    begin
+        writeln(DataCari,'Tidak ditemukan');
+        
+    end;
+end;
+
+procedure CariBeratBadan(var BeratBadan : ArrayBerat);
+var
+    i, DataCari: integer;
+
+begin
+    write('Berat Badan yang dicari : ');readln(DataCari);
+    i := 1;
+
+    while(BeratBadan[i] <> DataCari) and (i < MAKSDATA) do
+    begin
+        i := i + 1;
+    end;
+    if(BeratBadan[i] = DataCari) then
+    begin
+        writeln(DataCari,'Ditemukan pada indeks ke-',i);
+        writeln('------------DATA KE-',i,'---------------------');
+        writeln('No. Rekam Medis            : ',NoRM[i]);
+        writeln('Nama                       : ',Nama[i]);
+        writeln('Jenis Kelamin              : ',JenisKelamin[i]);
+        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
+        writeln('Berat Badan                : ',BeratBadan[i]);
+        writeln('Tinggi Badan               : ',TinggiBadan[i]);
+        writeln('Diagnosa                   : ',Diagnosa[i]);
+    end
+    else
+    begin
+        writeln(DataCari,'Tidak ditemukan');
+        
+    end;
+end;
+procedure CariTinggiBadan(var TInggiBadan : Arraytinggi);
+var
+   i, DataCari: integer;
+
+begin
+    write('Tinggi Badan yang dicari : ');readln(DataCari);
+    i := 1;
+
+    while(TInggiBadan[i] <> DataCari) and (i < MAKSDATA) do
+    begin
+        i := i + 1;
+    end;
+    if(TInggiBadan[i] = DataCari) then
+    begin
+        writeln(DataCari,'Ditemukan pada indeks ke-',i);
+        writeln('------------DATA KE-',i,'---------------------');
+        writeln('No. Rekam Medis            : ',NoRM[i]);
+        writeln('Nama                       : ',Nama[i]);
+        writeln('Jenis Kelamin              : ',JenisKelamin[i]);
+        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
+        writeln('Berat Badan                : ',BeratBadan[i]);
+        writeln('Tinggi Badan               : ',TinggiBadan[i]);
+        writeln('Diagnosa                   : ',Diagnosa[i]);
+    end
+    else
+    begin
+        writeln(DataCari,'Tidak ditemukan');
+        
+    end;
+end;
+
+procedure CariDiagnosa(var Diagnosa : ArrayDiagnosa);
+var
+    i : integer;
+    DataCari : string;
+begin
+    write('Diagnosa yang dicari : ');readln(DataCari);
+    i := 1;
+
+    while(Diagnosa[i] <> DataCari) and (i < MAKSDATA) do
+    begin
+        i := i + 1;
+    end;
+    if(Diagnosa[i] = DataCari) then
+    begin
+        writeln(DataCari,'Ditemukan pada indeks ke-',i);
+        writeln('------------DATA KE-',i,'---------------------');
+        writeln('No. Rekam Medis            : ',NoRM[i]);
+        writeln('Nama                       : ',Nama[i]);
+        writeln('Jenis Kelamin              : ',JenisKelamin[i]);
+        writeln('Tanggal Periksa [DD/MM/YY] : ',TanggalPeriksa[i]);
+        writeln('Berat Badan                : ',BeratBadan[i]);
+        writeln('Tinggi Badan               : ',TinggiBadan[i]);
+        writeln('Diagnosa                   : ',Diagnosa[i]);
+    end
+    else
+    begin
+        writeln(DataCari,'Tidak ditemukan');
+        
+    end;
+end;
+
+
 //Algoritma Utama
 begin
     clrscr;
@@ -1070,12 +1270,12 @@ begin
 
                                                 end;
                                             end;
-                                        readln;
                                         clrscr;
                                         MenuSortingDsc(PilihanDsc);
                                         end;   
                                     end;
                                 end;
+                            clrscr;
                             MenuPengurutan(PilihanPengurutan);
                             end;
                         end;
@@ -1091,18 +1291,33 @@ begin
 
                                     end;
                                     2 : begin
-                                        writeln('NaN');
+                                        clrscr;
+                                        CariNama(Nama);
+
                                     end;
                                     3 : begin
-                                        writeln('NaN');
+                                        clrscr;
+                                        CariJenisKelamin(JenisKelamin);
                                         
                                     end;
                                     4 : begin
-                                        writeln('NaN');
+                                        clrscr;
+                                        CariTanggalPeriksa(TanggalPeriksa);
                                         
                                     end;
                                     5 : begin
-                                        writeln('NaN');
+                                        clrscr;
+                                        CariBeratBadan(BeratBadan);
+                                        
+                                    end;
+                                    6 : begin
+                                        clrscr;
+                                        CariTinggiBadan(TInggiBadan);
+                                        
+                                    end;
+                                    7 : begin
+                                        clrscr;
+                                        CariDiagnosa(Diagnosa);
                                         
                                     end;
                                 end;
@@ -1134,3 +1349,12 @@ begin
     clrscr;
     write('Selamat Tinggal!');
 end.
+
+(* writeln('<<         MENU PENCARIAN      >>');
+    writeln('1. Cari No. Rekam Medis');
+    writeln('2. Cari Nama');
+    writeln('3. Cari Jenis Kelamin');
+    writeln('4. Cari Tanggal Periksa');
+    writeln('5. Cari Berat Badan');
+    writeln('5. Cari Tinggi Badan');
+    writeln('7. Cari Diagnosis'); *)
