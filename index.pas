@@ -1241,9 +1241,9 @@ begin
     else
     begin
         JumlahLaki := 0;
-    JumlahPerempuan := 0;
-    TotalBerat := 0;
-    TotalTinggi := 0;
+        JumlahPerempuan := 0;
+        TotalBerat := 0;
+        TotalTinggi := 0;
     
     // Inisialisasi nilai max dan min dengan data pertama jika ada
     if BanyakData > 0 then

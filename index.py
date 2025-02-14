@@ -4,23 +4,50 @@ from traceback import print_tb
 
 MAKSDATA = 10
 
-NoRM            = [0] * MAKSDATA
-Nama            = [0] * MAKSDATA
-JenisKelamin    = [0] * MAKSDATA
-TanggalPeriksa  = [0] * MAKSDATA
+NoRM            = ['/'] * MAKSDATA
+Nama            = ['/'] * MAKSDATA
+JenisKelamin    = ['/'] * MAKSDATA
+TanggalPeriksa  = ['/'] * MAKSDATA
 BeratBadan      = [0] * MAKSDATA
 TinggiBadan     = [0] * MAKSDATA
-Diagnosa        = [0] * MAKSDATA
+Diagnosa        = ['/'] * MAKSDATA
 
 def Test(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
-    NoRM[0]         = 'A-01'
-    Nama[0]         = 'Aido'
-    JenisKelamin[0] = 'P'
-    TanggalPeriksa[0] = '01-01-2024'
-    BeratBadan[0]   = 50
-    TinggiBadan[0]  = 160
-    Diagnosa[0]     = 'Demam'
-    BanyakData = 1
+    NoRM[0]             = 'A-01'
+    Nama[0]             = 'Aido'
+    JenisKelamin[0]     = 'P'
+    TanggalPeriksa[0]   = '01-01-2024'
+    BeratBadan[0]       = 50
+    TinggiBadan[0]      = 160
+    Diagnosa[0]         = 'Demam'
+
+    NoRM[1]             = 'A-02'
+    Nama[1]             = 'Budi'
+    JenisKelamin[1]     = 'L'
+    TanggalPeriksa[1]   = '120225'
+    BeratBadan[1]       = 76
+    TinggiBadan[1]      = 170
+    Diagnosa[1]         = 'Demam'
+
+    
+    NoRM[2]             = 'A-03'
+    Nama[2]             = 'Yanto'
+    JenisKelamin[2]     = 'L'
+    TanggalPeriksa[2]   = '120225'
+    BeratBadan[2]       = 60
+    TinggiBadan[2]      = 150
+    Diagnosa[2]         = 'Demam'
+
+    
+    NoRM[3]             = 'A-04'
+    Nama[3]             = 'Gusti'
+    JenisKelamin[3]     = 'L'
+    TanggalPeriksa[3]   = '120225'
+    BeratBadan[3]       = 80
+    TinggiBadan[3]      = 160
+    Diagnosa[3]         = 'Diare'
+
+    BanyakData = 4
     return BanyakData
 
 def MenuPilihan(Pilihan):
@@ -237,342 +264,340 @@ def MenuSortingAsc(PilihanAsc):
 #PENGURUTAN ASCENDING
 def UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     for i in range(BanyakData-1):
-        for j in range(BanyakData, i, -1):
+        for j in range(BanyakData-1,i+1,-1):
             if NoRM[j] < NoRM[j-1]:
-                TempStr = NoRM[j]
+                Temp = NoRM[j]
                 NoRM[j] = NoRM[j-1]
-                NoRM[j-1] = TempStr
+                NoRM[j-1] = Temp
                 
-                TempStr = Nama[j]
+                Temp = Nama[j]
                 Nama[j] = Nama[j-1]
-                Nama[j-1] = TempStr
+                Nama[j-1] = Temp
 
-                TempStr = JenisKelamin[j]
+                Temp = JenisKelamin[j]
                 JenisKelamin[j] = JenisKelamin[j-1]
-                JenisKelamin[j-1] = TempStr
+                JenisKelamin[j-1] = Temp
 
-                TempStr = TanggalPeriksa[j]
+                Temp = TanggalPeriksa[j]
                 TanggalPeriksa[j] = TanggalPeriksa[j-1]
-                TanggalPeriksa[j-1] = TempStr
+                TanggalPeriksa[j-1] = Temp
 
-                TempInt = BeratBadan[j]
+                Temp = BeratBadan[j]
                 BeratBadan[j] = BeratBadan[j-1]
-                BeratBadan[j-1] = TempInt
+                BeratBadan[j-1] = Temp
 
-                TempInt = TinggiBadan[j]
+                Temp = TinggiBadan[j]
                 TinggiBadan[j] = TinggiBadan[j-1]
-                TinggiBadan[j-1] = TempInt
+                TinggiBadan[j-1] = Temp
 
-                TempStr = Diagnosa[j]
+                Temp = Diagnosa[j]
                 Diagnosa[j] = Diagnosa[j-1]
-                Diagnosa[j-1] = TempStr
+                Diagnosa[j-1] = Temp
 
 def UrutNamaAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     for i in range(BanyakData-1):
-        for j in range(BanyakData, i, -1):
+        for j in range(BanyakData-1,i+1,-1):
             if Nama[j] < Nama[j-1]:
-                TempStr = NoRM[j]
+                Temp = NoRM[j]
                 NoRM[j] = NoRM[j-1]
-                NoRM[j-1] = TempStr
+                NoRM[j-1] = Temp
                 
-                TempStr = Nama[j]
+                Temp = Nama[j]
                 Nama[j] = Nama[j-1]
-                Nama[j-1] = TempStr
+                Nama[j-1] = Temp
 
-                TempStr = JenisKelamin[j]
+                Temp = JenisKelamin[j]
                 JenisKelamin[j] = JenisKelamin[j-1]
-                JenisKelamin[j-1] = TempStr
+                JenisKelamin[j-1] = Temp
 
-                TempStr = TanggalPeriksa[j]
+                Temp = TanggalPeriksa[j]
                 TanggalPeriksa[j] = TanggalPeriksa[j-1]
-                TanggalPeriksa[j-1] = TempStr
+                TanggalPeriksa[j-1] = Temp
 
-                TempInt = BeratBadan[j]
+                Temp = BeratBadan[j]
                 BeratBadan[j] = BeratBadan[j-1]
-                BeratBadan[j-1] = TempInt
+                BeratBadan[j-1] = Temp
 
-                TempInt = TinggiBadan[j]
+                Temp = TinggiBadan[j]
                 TinggiBadan[j] = TinggiBadan[j-1]
-                TinggiBadan[j-1] = TempInt
+                TinggiBadan[j-1] = Temp
 
-                TempStr = Diagnosa[j]
+                Temp = Diagnosa[j]
                 Diagnosa[j] = Diagnosa[j-1]
-                Diagnosa[j-1] = TempStr
+                Diagnosa[j-1] = Temp
 
 def UrutTanggalPeriksaAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     for i in range(BanyakData-1):
-        for j in range(BanyakData, i, -1):
+        for j in range(BanyakData-1,i+1,-1):
             if TanggalPeriksa[j] < TanggalPeriksa[j-1]:
-                TempStr = NoRM[j]
+                Temp = NoRM[j]
                 NoRM[j] = NoRM[j-1]
-                NoRM[j-1] = TempStr
+                NoRM[j-1] = Temp
                 
-                TempStr = Nama[j]
+                Temp = Nama[j]
                 Nama[j] = Nama[j-1]
-                Nama[j-1] = TempStr
+                Nama[j-1] = Temp
 
-                TempStr = JenisKelamin[j]
+                Temp = JenisKelamin[j]
                 JenisKelamin[j] = JenisKelamin[j-1]
-                JenisKelamin[j-1] = TempStr
+                JenisKelamin[j-1] = Temp
 
-                TempStr = TanggalPeriksa[j]
+                Temp = TanggalPeriksa[j]
                 TanggalPeriksa[j] = TanggalPeriksa[j-1]
-                TanggalPeriksa[j-1] = TempStr
+                TanggalPeriksa[j-1] = Temp
 
-                TempInt = BeratBadan[j]
+                Temp = BeratBadan[j]
                 BeratBadan[j] = BeratBadan[j-1]
-                BeratBadan[j-1] = TempInt
+                BeratBadan[j-1] = Temp
 
-                TempInt = TinggiBadan[j]
+                Temp = TinggiBadan[j]
                 TinggiBadan[j] = TinggiBadan[j-1]
-                TinggiBadan[j-1] = TempInt
+                TinggiBadan[j-1] = Temp
 
-                TempStr = Diagnosa[j]
+                Temp = Diagnosa[j]
                 Diagnosa[j] = Diagnosa[j-1]
-                Diagnosa[j-1] = TempStr
+                Diagnosa[j-1] = Temp
 
 #Minimum Sort Asc
 def UrutBeratBadanAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     for i in range(BanyakData-1):
         min = i
-        for j in range(i+1, BanyakData):
-            if BeratBadan[j] < BeratBadan[min]:
+        for j in range(i+1,BanyakData):
+            if (BeratBadan[j] < BeratBadan[min]):
                 min = j
+        Temp = Nama[i]
+        Nama[i] = Nama[min]
+        Nama[min] = Temp
 
-        TempStr = Nama[min]
-        Nama[min] = Nama[i]
-        Nama[i] = TempStr
-
-        TempStr = NoRM[min]
-        NoRM[min] = NoRM[i]
-        NoRM[i] = TempStr
+        Temp = NoRM[i]
+        NoRM[i] = NoRM[min]
+        NoRM[min] = Temp
         
-        TempStr = JenisKelamin[min]
-        JenisKelamin[min] = JenisKelamin[i]
-        JenisKelamin[i] = TempStr
+        Temp = JenisKelamin[i]
+        JenisKelamin[i] = JenisKelamin[min]
+        JenisKelamin[min] = Temp
 
-        TempStr = TanggalPeriksa[min]
-        TanggalPeriksa[min] = TanggalPeriksa[i]
-        TanggalPeriksa[i] = TempStr
+        Temp = TanggalPeriksa[i]
+        TanggalPeriksa[i] = TanggalPeriksa[min]
+        TanggalPeriksa[min] = Temp
 
-        TempInt = BeratBadan[min]
-        BeratBadan[min] = BeratBadan[i]
-        BeratBadan[i] = TempInt
+        Temp = BeratBadan[i]
+        BeratBadan[i] = BeratBadan[min]
+        BeratBadan[min] = Temp
 
-        TempInt = TinggiBadan[min]
-        TinggiBadan[min] = TinggiBadan[i]
-        TinggiBadan[i] = TempInt
+        Temp = TinggiBadan[i]
+        TinggiBadan[i] = TinggiBadan[min]
+        TinggiBadan[min] = Temp
 
-        TempStr = Diagnosa[min]
-        Diagnosa[min] = Diagnosa[i]
-        Diagnosa[i] = TempStr
+        Temp = Diagnosa[i]
+        Diagnosa[i] = Diagnosa[min]
+        Diagnosa[min] = Temp
 
 #Maximum Sort Asc
 def UrutTinggiBadanAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     for i in range(BanyakData-1):
-        max = i
-        for j in range(1, (BanyakData+1)-i):
-            if TinggiBadan[j] > TinggiBadan[max]:
+        max = 0
+        for j in range(1,BanyakData+1-(i+1)):
+            if (TinggiBadan[j] > TinggiBadan[max]):
                 max = j
 
-        TempStr = Nama[max]
-        Nama[max] = Nama[i]
-        Nama[i] = TempStr
+        Temp = Nama[j]
+        Nama[j] = Nama[max]
+        Nama[max] = Temp
 
-        TempStr = NoRM[max]
-        NoRM[max] = NoRM[i]
-        NoRM[i] = TempStr
+        Temp = NoRM[j]
+        NoRM[j] = NoRM[max]
+        NoRM[max] = Temp
         
-        TempStr = JenisKelamin[max]
-        JenisKelamin[max] = JenisKelamin[i]
-        JenisKelamin[i] = TempStr
+        Temp = JenisKelamin[j]
+        JenisKelamin[j] = JenisKelamin[max]
+        JenisKelamin[max] = Temp
 
-        TempStr = TanggalPeriksa[max]
-        TanggalPeriksa[max] = TanggalPeriksa[i]
-        TanggalPeriksa[i] = TempStr
+        Temp = TanggalPeriksa[j]
+        TanggalPeriksa[j] = TanggalPeriksa[max]
+        TanggalPeriksa[max] = Temp
 
-        TempInt = BeratBadan[max]
-        BeratBadan[max] = BeratBadan[i]
-        BeratBadan[i] = TempInt
+        Temp = BeratBadan[j]
+        BeratBadan[j] = BeratBadan[max]
+        BeratBadan[max] = Temp
 
-        TempInt = TinggiBadan[max]
-        TinggiBadan[max] = TinggiBadan[i]
-        TinggiBadan[i] = TempInt
+        Temp = TinggiBadan[j]
+        TinggiBadan[j] = TinggiBadan[max]
+        TinggiBadan[max] = Temp
 
-        TempStr = Diagnosa[max]
-        Diagnosa[max] = Diagnosa[i]
-        Diagnosa[i] = TempStr
+        Temp = Diagnosa[j]
+        Diagnosa[j] = Diagnosa[max]
+        Diagnosa[max] = Temp
 
 #PENGURUTAN DESCENDING
 def UrutNoRMDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     for i in range(BanyakData-1):
-        for j in range(BanyakData-1, i, -1):
-            if(NoRM[j] > NoRM[j-1]):
-                TempStr = NoRM[j]
-                NoRM[j] = NoRM[j-1]
-                NoRM[j-1] = TempStr
+        for j in range((BanyakData-1)-i):
+            if(NoRM[j] < NoRM[j+1]):
+                Temp = NoRM[j]
+                NoRM[j] = NoRM[j+1]
+                NoRM[j+1] = Temp
                 
-                TempStr = Nama[j]
-                Nama[j] = Nama[j-1]
-                Nama[j-1] = TempStr
+                Temp = Nama[j]
+                Nama[j] = Nama[j+1]
+                Nama[j+1] = Temp
 
-                TempStr = JenisKelamin[j]
-                JenisKelamin[j] = JenisKelamin[j-1]
-                JenisKelamin[j-1] = TempStr
+                Temp = JenisKelamin[j]
+                JenisKelamin[j] = JenisKelamin[j+1]
+                JenisKelamin[j+1] = Temp
 
-                TempStr = TanggalPeriksa[j]
-                TanggalPeriksa[j] = TanggalPeriksa[j-1]
-                TanggalPeriksa[j-1] = TempStr
+                Temp = TanggalPeriksa[j]
+                TanggalPeriksa[j] = TanggalPeriksa[j+1]
+                TanggalPeriksa[j+1] = Temp
 
-                TempInt = BeratBadan[j]
-                BeratBadan[j] = BeratBadan[j-1]
-                BeratBadan[j-1] = TempInt
+                Temp = BeratBadan[j]
+                BeratBadan[j] = BeratBadan[j+1]
+                BeratBadan[j+1] = Temp
 
-                TempInt = TinggiBadan[j]
-                TinggiBadan[j] = TinggiBadan[j-1]
-                TinggiBadan[j-1] = TempInt
+                Temp = TinggiBadan[j]
+                TinggiBadan[j] = TinggiBadan[j+1]
+                TinggiBadan[j+1] = Temp
 
-                TempStr = Diagnosa[j]
-                Diagnosa[j] = Diagnosa[j-1]
-                Diagnosa[j-1] = TempStr
+                Temp = Diagnosa[j]
+                Diagnosa[j] = Diagnosa[j+1]
+                Diagnosa[j+1] = Temp
 
 def UrutNamaDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     for i in range(BanyakData-1):
-        for j in range(BanyakData-1, i, -1):
-            if(Nama[j] > Nama[j-1]):
-                TempStr = Nama[j]
-                Nama[j] = Nama[j-1]
-                Nama[j-1] = TempStr
+        for j in range((BanyakData-1)-i):
+            if(Nama[j] < Nama[j+1]):
+                Temp = Nama[j]
+                Nama[j] = Nama[j+1]
+                Nama[j+1] = Temp
 
-                TempStr = NoRM[j]
-                NoRM[j] = NoRM[j-1]
-                NoRM[j-1] = TempStr
+                Temp = NoRM[j]
+                NoRM[j] = NoRM[j+1]
+                NoRM[j+1] = Temp
                 
-                TempStr = JenisKelamin[j]
-                JenisKelamin[j] = JenisKelamin[j-1]
-                JenisKelamin[j-1] = TempStr
+                Temp = JenisKelamin[j]
+                JenisKelamin[j] = JenisKelamin[j+1]
+                JenisKelamin[j+1] = Temp
 
-                TempStr = TanggalPeriksa[j]
-                TanggalPeriksa[j] = TanggalPeriksa[j-1]
-                TanggalPeriksa[j-1] = TempStr
+                Temp = TanggalPeriksa[j]
+                TanggalPeriksa[j] = TanggalPeriksa[j+1]
+                TanggalPeriksa[j+1] = Temp
 
-                TempInt = BeratBadan[j]
-                BeratBadan[j] = BeratBadan[j-1]
-                BeratBadan[j-1] = TempInt
+                Temp = BeratBadan[j]
+                BeratBadan[j] = BeratBadan[j+1]
+                BeratBadan[j+1] = Temp
 
-                TempInt = TinggiBadan[j]
-                TinggiBadan[j] = TinggiBadan[j-1]
-                TinggiBadan[j-1] = TempInt
+                Temp = TinggiBadan[j]
+                TinggiBadan[j] = TinggiBadan[j+1]
+                TinggiBadan[j+1] = Temp
 
-                TempStr = Diagnosa[j]
-                Diagnosa[j] = Diagnosa[j-1]
-                Diagnosa[j-1] = TempStr
+                Temp = Diagnosa[j]
+                Diagnosa[j] = Diagnosa[j+1]
+                Diagnosa[j+1] = Temp
 
-def  UrutTanggalPeriksaDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
+def UrutTanggalPeriksaDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     for i in range(BanyakData-1):
-        for j in range(BanyakData-1, i, -1):
-            if(TanggalPeriksa[j] > TanggalPeriksa[j-1]):
-                TempStr = Nama[j]
-                Nama[j] = Nama[j-1]
-                Nama[j-1] = TempStr
+        for j in range((BanyakData-1)-i):
+            if(TanggalPeriksa[j] < TanggalPeriksa[j+1]):
+                Temp = Nama[j]
+                Nama[j] = Nama[j+1]
+                Nama[j+1] = Temp
 
-                TempStr = NoRM[j]
-                NoRM[j] = NoRM[j-1]
-                NoRM[j-1] = TempStr
+                Temp = NoRM[j]
+                NoRM[j] = NoRM[j+1]
+                NoRM[j+1] = Temp
                 
-                TempStr = JenisKelamin[j]
-                JenisKelamin[j] = JenisKelamin[j-1]
-                JenisKelamin[j-1] = TempStr
+                Temp = JenisKelamin[j]
+                JenisKelamin[j] = JenisKelamin[j+1]
+                JenisKelamin[j+1] = Temp
 
-                TempStr = TanggalPeriksa[j]
-                TanggalPeriksa[j] = TanggalPeriksa[j-1]
-                TanggalPeriksa[j-1] = TempStr
+                Temp = TanggalPeriksa[j]
+                TanggalPeriksa[j] = TanggalPeriksa[j+1]
+                TanggalPeriksa[j+1] = Temp
 
-                TempInt = BeratBadan[j]
-                BeratBadan[j] = BeratBadan[j-1]
-                BeratBadan[j-1] = TempInt
+                Temp = BeratBadan[j]
+                BeratBadan[j] = BeratBadan[j+1]
+                BeratBadan[j+1] = Temp
 
-                TempInt = TinggiBadan[j]
-                TinggiBadan[j] = TinggiBadan[j-1]
-                TinggiBadan[j-1] = TempInt
+                Temp = TinggiBadan[j]
+                TinggiBadan[j] = TinggiBadan[j+1]
+                TinggiBadan[j+1] = Temp
 
-                TempStr = Diagnosa[j]
-                Diagnosa[j] = Diagnosa[j-1]
-                Diagnosa[j-1] = TempStr
+                Temp = Diagnosa[j]
+                Diagnosa[j] = Diagnosa[j+1]
+                Diagnosa[j+1] = Temp
 
 
 #Maximum Sort Desc
 def UrutBeratBadanDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     for i in range(BanyakData-1):
-        max = i
-        for j in range(BanyakData-1, i, -1):
-            if(BeratBadan[j] > BeratBadan[max]):
+        max = 0
+        for j in range(1,BanyakData+1-(i+1)):
+            if (BeratBadan[j] < BeratBadan[max]):
                 max = j
-        if (max != i) :
-            TempStr = Nama[i]
-            Nama[i] = Nama[max]
-            Nama[max] = TempStr
+        Temp = Nama[j]
+        Nama[j] = Nama[max]
+        Nama[max] = Temp
 
-            TempStr = NoRM[i]
-            NoRM[i] = NoRM[max]
-            NoRM[max] = TempStr
-                
-            TempStr = JenisKelamin[i]
-            JenisKelamin[i] = JenisKelamin[max]
-            JenisKelamin[max] = TempStr
+        Temp = NoRM[j]
+        NoRM[j] = NoRM[max]
+        NoRM[max] = Temp
+            
+        Temp = JenisKelamin[j]
+        JenisKelamin[j] = JenisKelamin[max]
+        JenisKelamin[max] = Temp
 
-            TempStr = TanggalPeriksa[i]
-            TanggalPeriksa[i] = TanggalPeriksa[max]
-            TanggalPeriksa[max] = TempStr
+        Temp = TanggalPeriksa[j]
+        TanggalPeriksa[j] = TanggalPeriksa[max]
+        TanggalPeriksa[max] = Temp
 
-            TempInt = BeratBadan[i]
-            BeratBadan[i] = BeratBadan[max]
-            BeratBadan[max] = TempInt
+        Temp = BeratBadan[j]
+        BeratBadan[j] = BeratBadan[max]
+        BeratBadan[max] = Temp
 
-            TempInt = TinggiBadan[i]
-            TinggiBadan[i] = TinggiBadan[max]
-            TinggiBadan[max] = TempInt
+        Temp = TinggiBadan[j]
+        TinggiBadan[j] = TinggiBadan[max]
+        TinggiBadan[max] = Temp
 
-            TempStr = Diagnosa[i]
-            Diagnosa[i] = Diagnosa[max]
-            Diagnosa[max] = TempStr
+        Temp = Diagnosa[j]
+        Diagnosa[j] = Diagnosa[max]
+        Diagnosa[max] = Temp
 
 
 #Minimum Sort Desc
 def  UrutTinggiBadanDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     for i in range(BanyakData-1):
-        max = 1
-        for j in range(2, (BanyakData+1) - i):
-            if(TinggiBadan[j] < TinggiBadan[max]):
-                max = j
+        min = i
+        for j in range(i+1,BanyakData):
+            if (TinggiBadan[j] > TinggiBadan[min]):
+                min = j
 
-        TempStr = Nama[max]
-        Nama[max] = Nama[j]
-        Nama[j] = TempStr
+        Temp = TinggiBadan[min]
+        TinggiBadan[min] = TinggiBadan[i]
+        TinggiBadan[i] = Temp
 
-        TempStr = NoRM[max]
-        NoRM[max] = NoRM[j]
-        NoRM[j] = TempStr
+        Temp = NoRM[min]
+        NoRM[min] = NoRM[i]
+        NoRM[i] = Temp
 
-        TempStr = JenisKelamin[max]
-        JenisKelamin[max] = JenisKelamin[j]
-        JenisKelamin[j] = TempStr
+        Temp = Nama[min]
+        Nama[min] = Nama[i]
+        Nama[i] = Temp
 
-        TempStr = TanggalPeriksa[max]
-        TanggalPeriksa[max] = TanggalPeriksa[j]
-        TanggalPeriksa[j] = TempStr
+        Temp = JenisKelamin[min]
+        JenisKelamin[min] = JenisKelamin[i]
+        JenisKelamin[i] = Temp
 
-        TempInt = BeratBadan[max]
-        BeratBadan[max] = BeratBadan[j]
-        BeratBadan[j] = TempInt
+        Temp = TanggalPeriksa[min]
+        TanggalPeriksa[min] = TanggalPeriksa[i]
+        TanggalPeriksa[i] = Temp
 
-        TempInt = TinggiBadan[max]
-        TinggiBadan[max] = TinggiBadan[j]
-        TinggiBadan[j] = TempInt
+        Temp = BeratBadan[min]
+        BeratBadan[min] = BeratBadan[i]
+        BeratBadan[i] = Temp
 
-        TempStr = Diagnosa[max]
-        Diagnosa[max] = Diagnosa[j]
-        Diagnosa[j] = TempStr
+        Temp = Diagnosa[min]
+        Diagnosa[min] = Diagnosa[i]
+        Diagnosa[i] = Temp
 
 def MenuPengurutan(PilihanPengurutan):
     if(BanyakData == 0):
@@ -586,39 +611,330 @@ def MenuPengurutan(PilihanPengurutan):
         print('|            0. Keluar                |')
         print('+=====================================+')
         PilihanPengurutan = int(input('Pilihan? '))
-        return PilihanPengurutan
+    return PilihanPengurutan
 
 
 
 def MenuSortingDsc(PilihanDsc):
-    print('+===========================================+')
-    print('|       MENGURUTKAN DATA SECARA MENURUN      |')
-    print('+===========================================+')
-    print('|            1. No. Rekam Medis             |')
-    print('|            2. Nama                        |')
-    print('|            3. Tanggal Periksa             |')
-    print('|            4. Berat Badan                 |')
-    print('|            5. Tinggi Badan                |')
-    print('|            0. Keluar                      |')
-    print('+===========================================+')
-    PilihanDsc = int(input('Pilihan?'))
+    if(BanyakData == 0):
+        print('Belum ada data!')
+    else:
+        print('+===========================================+')
+        print('|       MENGURUTKAN DATA SECARA MENURUN      |')
+        print('+===========================================+')
+        print('|            1. No. Rekam Medis             |')
+        print('|            2. Nama                        |')
+        print('|            3. Tanggal Periksa             |')
+        print('|            4. Berat Badan                 |')
+        print('|            5. Tinggi Badan                |')
+        print('|            0. Keluar                      |')
+        print('+===========================================+')
+        PilihanDsc = int(input('Pilihan?'))
     return PilihanDsc
 
 def MenuPencarian(PilihanPencarian):
-    print('+===========================================+')
-    print('|               MENU PENCARIAN              |')
-    print('+===========================================+')
-    print('|            1. Cari No. Rekam Medis        |')
-    print('|            2. Cari Nama                   |')
-    print('|            3. Cari Jenis Kelamin          |')
-    print('|            4. Cari Tanggal Periksa        |')
-    print('|            5. Cari Berat Badan            |')
-    print('|            6. Cari Tinggi Badan           |')
-    print('|            7. Cari Diagnosis              |')
-    print('|            0. Keluar                      |')
-    print('+===========================================+')
-    PilihanPencarian = int(input('Pilihan?'))
+    if(BanyakData == 0):
+        print('Belum ada data!')
+    else:
+        print('+===========================================+')
+        print('|               MENU PENCARIAN              |')
+        print('+===========================================+')
+        print('|            1. Cari No. Rekam Medis        |')
+        print('|            2. Cari Nama                   |')
+        print('|            3. Cari Jenis Kelamin          |')
+        print('|            4. Cari Tanggal Periksa        |')
+        print('|            5. Cari Berat Badan            |')
+        print('|            6. Cari Tinggi Badan           |')
+        print('|            7. Cari Diagnosis              |')
+        print('|            0. Keluar                      |')
+        print('+===========================================+')
+        PilihanPencarian = int(input('Pilihan?'))
     return PilihanPencarian
+
+def PenghancuranArray(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa):
+    for i in range(MAKSDATA):
+        NoRM[i]           = 0
+        Nama[i]           = 0
+        JenisKelamin[i]   = 0
+        TanggalPeriksa[i] = 0
+        BeratBadan[i]     = 0
+        TinggiBadan[i]    = 0
+        Diagnosa[i]       = 0
+
+def CariNoRM(NoRM, BanyakData):
+
+    DataCari = str(input('No. Rekam Medis yang dicari? '))
+    Ia = 0
+    Ib = BanyakData
+    Ketemu = False
+
+    while(not Ketemu) and(Ia <= Ib):
+        K = (Ia + Ib) // 2
+
+        if(NoRM[K] == DataCari):
+            Ketemu = True
+        else:
+            if(NoRM[K] < DataCari):
+                Ia = K + 1
+            else:
+                Ib = K - 1
+    
+    if(Ketemu):
+        print('+-------------------------------------------------------+')
+        print(f'|                 DATA PASIEN-{K+1:<2}                        |')
+        print('+-------------------------------------------------------+')
+        print(f'| No. Rekam Medis            : {NoRM[K]:8}                 |')
+        print(f'| Nama                       : {Nama[K]:15}          |')
+        print(f'| Jenis Kelamin              : {JenisKelamin[K]:2}                       |')
+        print(f'| Tanggal Periksa [DD/MM/YY] : {TanggalPeriksa[K]:10}               |')
+        print(f'| Berat Badan                : {BeratBadan[K]:<5} kg                 |')
+        print(f'| Tinggi Badan               : {TinggiBadan[K]:<5} cm                 |')
+        print(f'| Diagnosa                   : {Diagnosa[K]:15}          |')
+        print('+-------------------------------------------------------+')
+    else:
+        print(f'{DataCari} tidak ditemukan')
+
+    print()
+    input()
+
+def CariNama(Nama):
+    DataCari = str(input('Nama yang dicari? ')).upper()
+    i = 0
+
+    while(Nama[i].upper() != DataCari) and (i < MAKSDATA):
+        i = i + 1
+
+    if(Nama[i].upper() == DataCari):
+        print('+-------------------------------------------------------+')
+        print(f'|                 DATA PASIEN-{i+1:<2}                        |')
+        print('+-------------------------------------------------------+')
+        print(f'| No. Rekam Medis            : {NoRM[i]:8}                 |')
+        print(f'| Nama                       : {Nama[i]:15}          |')
+        print(f'| Jenis Kelamin              : {JenisKelamin[i]:2}                       |')
+        print(f'| Tanggal Periksa [DD/MM/YY] : {TanggalPeriksa[i]:10}               |')
+        print(f'| Berat Badan                : {BeratBadan[i]:<5} kg                 |')
+        print(f'| Tinggi Badan               : {TinggiBadan[i]:<5} cm                 |')
+        print(f'| Diagnosa                   : {Diagnosa[i]:15}          |')
+        print('+-------------------------------------------------------+')
+    else:
+        print(f'{DataCari} tidak ditemukan')
+
+    print()
+    input()
+
+def CariJenisKelamin(JenisKelamin):
+    DataCari = str(input('Jenis Kelamin yang dicari? ')).upper()
+    Ketemu = False
+
+    for i in range(BanyakData):
+        if(JenisKelamin[i].upper() == DataCari):
+            print('+-------------------------------------------------------+')
+            print(f'|                 DATA PASIEN-{i+1:<2}                        |')
+            print('+-------------------------------------------------------+')
+            print(f'| No. Rekam Medis            : {NoRM[i]:8}                 |')
+            print(f'| Nama                       : {Nama[i]:15}          |')
+            print(f'| Jenis Kelamin              : {JenisKelamin[i]:2}                       |')
+            print(f'| Tanggal Periksa [DD/MM/YY] : {TanggalPeriksa[i]:10}               |')
+            print(f'| Berat Badan                : {BeratBadan[i]:<5} kg                 |')
+            print(f'| Tinggi Badan               : {TinggiBadan[i]:<5} cm                 |')
+            print(f'| Diagnosa                   : {Diagnosa[i]:15}          |')
+            print('+-------------------------------------------------------+')
+    
+    if not Ketemu:
+        print(f'{DataCari} tidak ditemukan')
+
+    print()
+    input()
+
+def CariTanggalPeriksa(TanggalPeriksa):
+    DataCari = str(input('Tanggal Periksa yang dicari? ')).upper()
+    Ketemu = False
+
+    for i in range(BanyakData):
+        if(TanggalPeriksa[i].upper() == DataCari):
+            print('+-------------------------------------------------------+')
+            print(f'|                 DATA PASIEN-{i+1:<2}                        |')
+            print('+-------------------------------------------------------+')
+            print(f'| No. Rekam Medis            : {NoRM[i]:8}                 |')
+            print(f'| Nama                       : {Nama[i]:15}          |')
+            print(f'| Jenis Kelamin              : {JenisKelamin[i]:2}                       |')
+            print(f'| Tanggal Periksa [DD/MM/YY] : {TanggalPeriksa[i]:10}               |')
+            print(f'| Berat Badan                : {BeratBadan[i]:<5} kg                 |')
+            print(f'| Tinggi Badan               : {TinggiBadan[i]:<5} cm                 |')
+            print(f'| Diagnosa                   : {Diagnosa[i]:15}          |')
+            print('+-------------------------------------------------------+')
+    
+    if not Ketemu:
+        print(f'{DataCari} tidak ditemukan')
+
+    print()
+    input()
+
+def CariTinggiBadan(TinggiBadan):
+    DataCari = str(input('Tinggi Badan yang dicari? ')).upper()
+    Ketemu = False
+
+    for i in range(BanyakData):
+        if(TinggiBadan[i].upper() == DataCari):
+            print('+-------------------------------------------------------+')
+            print(f'|                 DATA PASIEN-{i+1:<2}                        |')
+            print('+-------------------------------------------------------+')
+            print(f'| No. Rekam Medis            : {NoRM[i]:8}                 |')
+            print(f'| Nama                       : {Nama[i]:15}          |')
+            print(f'| Jenis Kelamin              : {JenisKelamin[i]:2}                       |')
+            print(f'| Tanggal Periksa [DD/MM/YY] : {TanggalPeriksa[i]:10}               |')
+            print(f'| Berat Badan                : {BeratBadan[i]:<5} kg                 |')
+            print(f'| Tinggi Badan               : {TinggiBadan[i]:<5} cm                 |')
+            print(f'| Diagnosa                   : {Diagnosa[i]:15}          |')
+            print('+-------------------------------------------------------+')
+    
+    if not Ketemu:
+        print(f'{DataCari} tidak ditemukan')
+
+    print()
+    input()
+
+def CariBeratBadan(BeratBadan):
+    DataCari = str(input('Berat Badan yang dicari? ')).upper()
+    Ketemu = False
+
+    for i in range(BanyakData):
+        if(BeratBadan[i].upper() == DataCari):
+            print('+-------------------------------------------------------+')
+            print(f'|                 DATA PASIEN-{i+1:<2}                        |')
+            print('+-------------------------------------------------------+')
+            print(f'| No. Rekam Medis            : {NoRM[i]:8}                 |')
+            print(f'| Nama                       : {Nama[i]:15}          |')
+            print(f'| Jenis Kelamin              : {JenisKelamin[i]:2}                       |')
+            print(f'| Tanggal Periksa [DD/MM/YY] : {TanggalPeriksa[i]:10}               |')
+            print(f'| Berat Badan                : {BeratBadan[i]:<5} kg                 |')
+            print(f'| Tinggi Badan               : {TinggiBadan[i]:<5} cm                 |')
+            print(f'| Diagnosa                   : {Diagnosa[i]:15}          |')
+            print('+-------------------------------------------------------+')
+    
+    if not Ketemu:
+        print(f'{DataCari} tidak ditemukan')
+
+    print()
+    input()
+
+def CariDiagnosa(Diagnosa):
+    DataCari = str(input('Diagnosa yang dicari? ')).upper()
+    Ketemu = False
+
+    for i in range(BanyakData):
+        if(Diagnosa[i].upper() == DataCari):
+            print('+-------------------------------------------------------+')
+            print(f'|                 DATA PASIEN-{i+1:<2}                        |')
+            print('+-------------------------------------------------------+')
+            print(f'| No. Rekam Medis            : {NoRM[i]:8}                 |')
+            print(f'| Nama                       : {Nama[i]:15}          |')
+            print(f'| Jenis Kelamin              : {JenisKelamin[i]:2}                       |')
+            print(f'| Tanggal Periksa [DD/MM/YY] : {TanggalPeriksa[i]:10}               |')
+            print(f'| Berat Badan                : {BeratBadan[i]:<5} kg                 |')
+            print(f'| Tinggi Badan               : {TinggiBadan[i]:<5} cm                 |')
+            print(f'| Diagnosa                   : {Diagnosa[i]:15}          |')
+            print('+-------------------------------------------------------+')
+    
+    if not Ketemu:
+        print(f'{DataCari} tidak ditemukan')
+
+    print()
+    input()
+
+def PenghapusanData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
+    for i in range(BanyakData):
+        print(f'+----------------------------+')
+        print(f'| {i:<2} | {NoRM:<5} | {Nama:<15} |')
+    print(f'+----------------------------+')
+    
+    PosisiHapus = int(input('Posisi Hapus?'))
+
+    if(BanyakData > 0):
+        if(PosisiHapus >= 1) and (PosisiHapus <= BanyakData):
+            for i in range(PosisiHapus+1, BanyakData):
+                NoRM[i-1] = NoRM[i]
+                Nama[i-1] = Nama[i]
+                JenisKelamin[i-1] = JenisKelamin[i]
+                TanggalPeriksa[i-1] = TanggalPeriksa[i]
+                BeratBadan[i-1] = BeratBadan[i]
+                TinggiBadan[i-1] = TinggiBadan[i]
+                Diagnosa[i-1] = Diagnosa[i]
+                
+            NoRM[BanyakData] = 0
+            Nama[BanyakData] = 0
+            JenisKelamin[BanyakData] = 0
+            TanggalPeriksa[BanyakData] = 0
+            BeratBadan[BanyakData] = 0
+            TinggiBadan[BanyakData] = 0
+            Diagnosa[BanyakData] = 0
+
+            BanyakData -= 1
+        else:
+            print('Posisi hapus tidak valid')
+    else:
+        print('Data Kosong')
+    
+def RekapRekamMedis(JenisKelamin, BeratBadan, TinggiBadan, BanyakData):
+    TotalBerat = TotalTinggi = JumlahLaki = JumlahPerempuan= 0
+    if(BanyakData == 0):
+        print('Belum ada data')
+    else:
+        if (BanyakData > 0):
+            MaxBerat = BeratBadan[1]
+            MinBerat = BeratBadan[1]
+            MaxTinggi = BeratBadan[1]
+            MinTinggi = BeratBadan[1]
+
+        for i in range(BanyakData):
+            if(JenisKelamin[i] == 'L'):
+                JumlahLaki += 1
+            if(JenisKelamin[i] == 'P'):
+                JumlahPerempuan += 1
+        
+            TotalBerat += BeratBadan[i]
+            TotalTinggi += TinggiBadan[i]
+
+            if(BeratBadan[i] > MaxBerat):
+                MaxBerat = BeratBadan[i]
+            if(BeratBadan[i] < MinBerat):
+                MinBerat = BeratBadan[i]
+            
+            if(TinggiBadan[i] > MaxTinggi):
+                MaxTinggi = TinggiBadan[i]
+            if(TinggiBadan[i] < MinTinggi):
+                MinTinggi = TinggiBadan[i]
+
+
+            RataBerat = TotalBerat / BanyakData
+            RataTinggi = TotalTinggi / BanyakData
+
+            os.system('clear')
+            print(f'+--------------------------------------------+')
+            print(f'|                  REKAP DATA                |')
+            print(f'+-------------------------+------------------+')
+            print(f'| Total Pasein            | {BanyakData:8} |')
+            print(f'+-------------------------+------------------+')
+            print(f'| Jumlah Pasien Laki      | {JumlahLaki:8} |')
+            print(f'| Jumlah Pasien Perempuan | {JumlahPerempuan:8}        |')
+            print(f'+-------------------------+------------------+')
+            print(f'| Rata-rata Berat Badan   | {RataBerat:8.2f} kg      |')
+            print(f'| Rata-rata Tinggi Badan  | {RataTinggi:8.2f} cm      |')
+            print(f'+-------------------------+------------------+')
+            print(f'| Berat Maksimum          | {MaxBerat:8} kg      |')
+            print(f'| Berat Minimum           | {MinBerat:8} kg      |')
+            print(f'| Tinggi Maksimum         | {MaxTinggi:8} cm      |')
+            print(f'| Tinggi Minimum          | {MinTinggi:8} cm      |')
+            print(f'+-------------------------+------------------+')
+            print()
+            input()
+
+
+
+
+
+
+
 
 # Algoritma Utama    
 os.system('clear')
@@ -635,8 +951,8 @@ while(Pilihan != 0):
                 match(PilihanPasien):
                     case 1:
                         os.system('clear')
-                        print('<< MENCARI DATA >>')
-                input()
+                        UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                        CariNoRM(NoRM, BanyakData)
                 os.system('clear')
                 PilihanPasien = MenuPasien(PilihanPasien)
                
@@ -652,6 +968,7 @@ while(Pilihan != 0):
                     case 2: 
                         os.system('clear')
                         TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                        input()
             
                     case 3: 
                         os.system('clear')
@@ -669,20 +986,20 @@ while(Pilihan != 0):
                                     while(PilihanAsc != 0):
                                         match(PilihanAsc):
                                             case 1:
-                                                print('<< MENGURUTKAN No. Rekam Medis SECARA ASC >>')
-        
+                                                UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                                TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
                                             case 2:
-                                                print('<< MENGURUTKAN NAMA SECARA ASC >>')
-        
+                                                UrutNamaAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                                TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
                                             case 3:
-                                                print('<< MENGURUTKAN Tanggal Periksa SECARA ASC >>')
-        
+                                                UrutTanggalPeriksaAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                                TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
                                             case 4:
-                                                print('<< MENGURUTKAN Berat Badan SECARA ASC >>')
-        
+                                                UrutBeratBadanAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                                TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
                                             case 5:
-                                                print('<< MENGURUTKAN Tinggi Badan SECARA ASC >>')
-        
+                                                UrutTinggiBadanAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                                TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
                                             case 6:
                                                 print('<< MENGURUTKAN Diagnosa SECARA ASC >>')
                                         input()
@@ -694,17 +1011,22 @@ while(Pilihan != 0):
                                     while(PilihanDsc != 0):
                                         match(PilihanDsc):
                                             case 1:
-                                                print('<< MENGURUTKAN No. Rekam Medis SECARA DESC >>')
+                                                UrutNoRMDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                                TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
                                             case 2:
-                                                print('<< MENGURUTKAN NAMA SECARA DESC >>')
+                                                UrutNamaDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                                TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
                                             case 3:
-                                                print('<< MENGURUTKAN Tanggal Periksa SECARA DESC >>')
+                                                UrutTanggalPeriksaDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                                TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
                                             case 4:
-                                                print('<< MENGURUTKAN Berat Badan SECARA DESC >>')
+                                                UrutBeratBadanDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                                TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
                                             case 5:
-                                                print('<< MENGURUTKAN Tinggi Badan SECARA DESC >>')
+                                                UrutTinggiBadanDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                                TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
                                             case 6:
-                                                print('<< MENGURUTKAN Diagnosa SECARA DESC >>')
+                                                print('<< MENGURUTKAN Diagnosa SECARA ASC >>')
                                         input()
                                         os.system('clear')
                                         PilihanDsc = MenuSortingDsc(PilihanDsc)
@@ -716,35 +1038,35 @@ while(Pilihan != 0):
                         while(PilihanPencarian != 0):
                             match(PilihanPencarian):
                                 case 1:
-                                    print('Cari NO. Rekam Medis')            
+                                    UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                    CariNoRM(NoRM, BanyakData)
                                 case 2:
-                                    print('Cari Nama')            
+                                    CariNama(Nama)            
                                 case 3:
-                                    print('Cari Jenis Kelamin')            
+                                    CariJenisKelamin(JenisKelamin)            
                                 case 4:
-                                    print('Cari Tanggal Periksa')            
+                                    CariTanggalPeriksa(TanggalPeriksa);            
                                 case 5:
-                                    print('Cari Berat Badan')            
+                                    CariBeratBadan(BeratBadan);            
                                 case 6:
-                                    print('Cari Tinggi Badan')            
+                                    CariTinggiBadan(TinggiBadan);            
                                 case 7:
-                                    print('Cari Diagnosa')    
+                                    CariDiagnosa(Diagnosa);    
                             os.system('clear')
                             PilihanPencarian = MenuPencarian(PilihanPencarian)
                                     
                     case 6: 
                         os.system('clear')
-                        print('<< Penghapusan DATA >>')
+                        PenghapusanData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
             
                     case 7: 
                         os.system('clear')
-                        print('<< Penghancuran DATA >>')
+                        PenghancuranArray(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa)
             
                     case 8: 
                         os.system('clear')
-                        print('<< Rekap Rekam Medis >>')
+                        RekapRekamMedis(JenisKelamin, BeratBadan, TinggiBadan, BanyakData)
             
-                input()
                 os.system('clear')
                 PilihanDokter = MenuDokter(PilihanDokter)
     os.system('clear')
