@@ -1,7 +1,6 @@
-#PROGRAM REKAM MEDIS
-#I.S : Pengguna memilih salah satu nomor menu
-#F.S : Menampilkan hasil sesuai nomor menu yang dipilih
 import os
+from time import process_time_ns
+from traceback import print_tb
 
 MAKSDATA = 10
 
@@ -12,6 +11,44 @@ TanggalPeriksa  = ['/'] * MAKSDATA
 BeratBadan      = [0] * MAKSDATA
 TinggiBadan     = [0] * MAKSDATA
 Diagnosa        = ['/'] * MAKSDATA
+
+def Test(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
+    NoRM[0]             = 'A-01'
+    Nama[0]             = 'Aido'
+    JenisKelamin[0]     = 'P'
+    TanggalPeriksa[0]   = '01-01-2024'
+    BeratBadan[0]       = 50
+    TinggiBadan[0]      = 160
+    Diagnosa[0]         = 'Demam'
+
+    NoRM[1]             = 'A-02'
+    Nama[1]             = 'Budi'
+    JenisKelamin[1]     = 'L'
+    TanggalPeriksa[1]   = '120225'
+    BeratBadan[1]       = 76
+    TinggiBadan[1]      = 170
+    Diagnosa[1]         = 'Demam'
+
+    
+    NoRM[2]             = 'A-03'
+    Nama[2]             = 'Yanto'
+    JenisKelamin[2]     = 'L'
+    TanggalPeriksa[2]   = '120225'
+    BeratBadan[2]       = 60
+    TinggiBadan[2]      = 150
+    Diagnosa[2]         = 'Demam'
+
+    
+    NoRM[3]             = 'A-04'
+    Nama[3]             = 'Gusti'
+    JenisKelamin[3]     = 'L'
+    TanggalPeriksa[3]   = '120225'
+    BeratBadan[3]       = 80
+    TinggiBadan[3]      = 160
+    Diagnosa[3]         = 'Diare'
+
+    BanyakData = 4
+    return BanyakData
 
 def MenuPilihan(Pilihan):
     print('+=====================+')
@@ -978,6 +1015,8 @@ def RekapRekamMedis(JenisKelamin, BeratBadan, TinggiBadan, BanyakData):
 # Algoritma Utama    
 os.system('clear')
 Pilihan = PilihanPasien = PilihanDokter = BanyakData= PilihanPengurutan=PilihanAsc=PilihanDsc=PilihanPencarian =MetodeCariPasein= 0
+BanyakData = Test(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+
 Pilihan = MenuPilihan(Pilihan)
 while(Pilihan != 0):
     match(Pilihan):

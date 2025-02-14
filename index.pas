@@ -1,6 +1,7 @@
 program RekamMedis;
 uses crt,SysUtils;
-
+{I.S : Pengguna memilih salah satu nomor menu}
+{F.S : Menampilkan hasil sesuai nomor menu yang dipilih}
 
 const
     MAKSDATA = 10;
@@ -26,41 +27,6 @@ var
 
     Pilihan,PilihanDokter,PilihanPasien, PilihanAsc,
     PilihanDsc,PilihanPengurutan,PilihanPencarian ,MetodeCariPasein,BanyakData : integer;
-
-//Testing Array
-procedure ArrayTest(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
-                            var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
-                            var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa );
-begin
-    //array 1
-    NoRM[1]             := 'A-01';
-    Nama[1]             := 'Budi';
-    JenisKelamin[1]     := 'L';
-    TanggalPeriksa[1]   := '120225';
-    BeratBadan[1]       := 76;
-    TinggiBadan[1]      := 170;
-    Diagnosa[1]         := 'Demam';
-
-    //array 2
-    NoRM[2]             := 'A-02';
-    Nama[2]             := 'Yanto';
-    JenisKelamin[2]     := 'L';
-    TanggalPeriksa[2]   := '120225';
-    BeratBadan[2]       := 60;
-    TinggiBadan[2]      := 150;
-    Diagnosa[2]         := 'Demam';
-
-    //array 3
-    NoRM[3]             := 'A-03';
-    Nama[3]             := 'Gusti';
-    JenisKelamin[3]     := 'L';
-    TanggalPeriksa[3]   := '120225';
-    BeratBadan[3]       := 80;
-    TinggiBadan[3]      := 160;
-    Diagnosa[3]         := 'Diare';
-
-    BanyakData := 3;
-end;
 
 procedure PenghancuranArray(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
                             var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
@@ -1400,7 +1366,6 @@ end;
 begin
     clrscr;
     BanyakData := 0;
-    ArrayTest(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa);
     MenuPilihan(Pilihan);
     while(Pilihan <> 0) do
     begin
