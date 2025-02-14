@@ -145,17 +145,17 @@ def IsiData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, D
     NoRM[i]           = input('No.Rekam Medis             : ')
 
     while(NoRM[i].upper() != 'STOP' and i < MAKSDATA and Status):
-        Nama[i]           = input('Nama                       : ')
-        JenisKelamin[i]   = input('Jenis Kelamin              : ')
-        TanggalPeriksa[i] = input('Tanggal Periksa            : ')
+        Nama[i]           = str(input('Nama                       : '))
+        JenisKelamin[i]   = str(input('Jenis Kelamin              : '))
+        TanggalPeriksa[i] = str(input('Tanggal Periksa            : '))
         BeratBadan[i]     = int(input('Berat Badan                : '))
         TinggiBadan[i]    = int(input('Tinggi Badan               : '))
-        Diagnosa[i]       = input('Diagnosa                   : ')
+        Diagnosa[i]       = str(input('Diagnosa                   : '))
         i = i + 1
 
         if i < MAKSDATA:
             print('----------------------DATA KE-', i+1, '--------------')
-            NoRM[i] = input('No.Rekam Medis             : ')
+            NoRM[i] = str(input('No.Rekam Medis             : '))
         else:
             print('Array Penuh!')
             Status = False
@@ -168,58 +168,67 @@ def EditData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, 
     if(BanyakData == 0):
         print('Belum ada data!')
     else:
-        print('+---------------------------------------------+')
-        print('| No. Rekam Medis |           Nama            |')
+        print('+--------------------------------------------------+')
+        print('| No |No. Rekam Medis |           Nama             |')
 
         for i in range(BanyakData):
-            print('+---------------------------------------------+')
-            print(f'| {NoRM[i]:15} | {Nama[i]:25} |')
-        print('+---------------------------------------------+')
+            print('+--------------------------------------------------+')
+            print(f'| {i+1:2} | {NoRM[i]:15} | {Nama[i]:25} |')
+        print('+--------------------------------------------------+')
 
-        NoEdit = str(input('Data yang mau di edit(No.RM)? '))
+        NoEdit = int(input('Data yang mau di edit(No.RM)? '))
 
-        for i in range(BanyakData):
-            if NoEdit == NoRM[i]:
-                Status = True
-                index = i
-            else:
-                Status = False
-        
-        if(Status):
+        while(NoEdit < 0) or (NoEdit > BanyakData):
+            print('Pilih no yang ada')
+            input()
             os.system('clear')
-            print('+=====================================+')
-            print('|        PILIH YANG MAU DI EDIT       |')
-            print('+=====================================+')
-            print('|           1. Nama                   |')
-            print('|           2. Jenis Kelamin          |')
-            print('|           3. Tanggaal Periksa       |')
-            print('|           4. Berat Badan            |')
-            print('|           5. Tinggi Badan           |')
-            print('|           6. Diagnosa               |')
-            print('|           0. Keluar                 |')
-            print('+=====================================+')
-            PilihanEdit = int(input('Pilihan?'))
+            print('+--------------------------------------------------+')
+            print('| No |No. Rekam Medis |           Nama             |')
 
-            match(PilihanEdit):
-                case 1:
-                    os.system('clear')
-                    Nama[index] = input('Nama Baru : ')
-                case 2:
-                    os.system('clear')
-                    JenisKelamin[index] = input('Jenis Kelamin Baru : ')
-                case 3:
-                    os.system('clear')
-                    TanggalPeriksa[index] = input('Tanggal Periksa Baru : ')
-                case 4:
-                    os.system('clear')
-                    BeratBadan[index] = int(input('Berat Badan Baru : '))
-                case 5:
-                    os.system('clear')
-                    TinggiBadan[index] = int(input('Tinggi Badan Baru : '))
-                case 6:
-                    os.system('clear')
-                    Diagnosa[index] = input('Diagnosa Baru : ')
+            for i in range(BanyakData):
+                print('+--------------------------------------------------+')
+                print(f'| {i+1:2} | {NoRM[i]:15} | {Nama[i]:25} |')
+            print('+--------------------------------------------------+')
 
+            NoEdit = int(input('Data yang mau di edit(No.RM)? '))
+        
+       
+        os.system('clear')
+        print('+=====================================+')
+        print('|        PILIH YANG MAU DI EDIT       |')
+        print('+=====================================+')
+        print('|           1. Nama                   |')
+        print('|           2. Jenis Kelamin          |')
+        print('|           3. Tanggaal Periksa       |')
+        print('|           4. Berat Badan            |')
+        print('|           5. Tinggi Badan           |')
+        print('|           6. Diagnosa               |')
+        print('|           0. Keluar                 |')
+        print('+=====================================+')
+        PilihanEdit = int(input('Pilihan?'))
+
+        match(PilihanEdit):
+            case 1:
+                os.system('clear')
+                Nama[NoEdit-1] = input('Nama Baru : ')
+            case 2:
+                os.system('clear')
+                JenisKelamin[NoEdit-1] = input('Jenis Kelamin Baru : ')
+            case 3:
+                os.system('clear')
+                TanggalPeriksa[NoEdit-1] = input('Tanggal Periksa Baru : ')
+            case 4:
+                os.system('clear')
+                BeratBadan[NoEdit-1] = int(input('Berat Badan Baru : '))
+            case 5:
+                os.system('clear')
+                TinggiBadan[NoEdit-1] = int(input('Tinggi Badan Baru : '))
+            case 6:
+                os.system('clear')
+                Diagnosa[NoEdit-1] = input('Diagnosa Baru : ')
+        print()
+        print('Data berhasil diubah!')
+    input()
 
 def TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
 
@@ -661,6 +670,11 @@ def PenghancuranArray(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, Ting
         TinggiBadan[i]    = 0
         Diagnosa[i]       = 0
 
+    BanyakData = 0
+    print('Data berhasil dihancurkan!')
+    input()
+    return BanyakData 
+
 def CariNoRM(NoRM, BanyakData):
 
     DataCari = str(input('No. Rekam Medis yang dicari? '))
@@ -843,16 +857,21 @@ def CariDiagnosa(Diagnosa):
     input()
 
 def PenghapusanData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
+    print(f'+==============================+')
+    print(f'|         REKAP MEDIS          |')
+
     for i in range(BanyakData):
-        print(f'+----------------------------+')
-        print(f'| {i:<2} | {NoRM:<5} | {Nama:<15} |')
-    print(f'+----------------------------+')
+        print(f'+------------------------------+')
+        print(f'| {i+1:<2} | {NoRM[i]:<5} | {Nama[i]:<15} |')
+    print(f'+==============================+')
     
     PosisiHapus = int(input('Posisi Hapus?'))
+    PosisiHapus -= 1
 
-    if(BanyakData > 0):
-        if(PosisiHapus >= 1) and (PosisiHapus <= BanyakData):
-            for i in range(PosisiHapus+1, BanyakData):
+    if BanyakData > 0:
+        if (PosisiHapus >= 0) and (PosisiHapus < BanyakData):
+            # Geser elemen setelah posisi hapus ke kiri
+            for i in range(PosisiHapus + 1, BanyakData):
                 NoRM[i-1] = NoRM[i]
                 Nama[i-1] = Nama[i]
                 JenisKelamin[i-1] = JenisKelamin[i]
@@ -860,20 +879,17 @@ def PenghapusanData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, Tinggi
                 BeratBadan[i-1] = BeratBadan[i]
                 TinggiBadan[i-1] = TinggiBadan[i]
                 Diagnosa[i-1] = Diagnosa[i]
-                
-            NoRM[BanyakData] = 0
-            Nama[BanyakData] = 0
-            JenisKelamin[BanyakData] = 0
-            TanggalPeriksa[BanyakData] = 0
-            BeratBadan[BanyakData] = 0
-            TinggiBadan[BanyakData] = 0
-            Diagnosa[BanyakData] = 0
-
+            
+            # Kurangi jumlah data
             BanyakData -= 1
+            print('Data berhasil dihapus.')
         else:
-            print('Posisi hapus tidak valid')
+            print('Posisi hapus tidak valid.')
     else:
         print('Data Kosong')
+
+    input()
+    return BanyakData
     
 def RekapRekamMedis(JenisKelamin, BeratBadan, TinggiBadan, BanyakData):
     TotalBerat = TotalTinggi = JumlahLaki = JumlahPerempuan= 0
@@ -909,25 +925,25 @@ def RekapRekamMedis(JenisKelamin, BeratBadan, TinggiBadan, BanyakData):
             RataBerat = TotalBerat / BanyakData
             RataTinggi = TotalTinggi / BanyakData
 
-            os.system('clear')
-            print(f'+--------------------------------------------+')
-            print(f'|                  REKAP DATA                |')
-            print(f'+-------------------------+------------------+')
-            print(f'| Total Pasein            | {BanyakData:8} |')
-            print(f'+-------------------------+------------------+')
-            print(f'| Jumlah Pasien Laki      | {JumlahLaki:8} |')
-            print(f'| Jumlah Pasien Perempuan | {JumlahPerempuan:8}        |')
-            print(f'+-------------------------+------------------+')
-            print(f'| Rata-rata Berat Badan   | {RataBerat:8.2f} kg      |')
-            print(f'| Rata-rata Tinggi Badan  | {RataTinggi:8.2f} cm      |')
-            print(f'+-------------------------+------------------+')
-            print(f'| Berat Maksimum          | {MaxBerat:8} kg      |')
-            print(f'| Berat Minimum           | {MinBerat:8} kg      |')
-            print(f'| Tinggi Maksimum         | {MaxTinggi:8} cm      |')
-            print(f'| Tinggi Minimum          | {MinTinggi:8} cm      |')
-            print(f'+-------------------------+------------------+')
-            print()
-            input()
+        os.system('clear')
+        print(f'+--------------------------------------------+')
+        print(f'|                  REKAP DATA                |')
+        print(f'+-------------------------+------------------+')
+        print(f'| Total Pasein            | {BanyakData:8}         |')
+        print(f'+-------------------------+------------------+')
+        print(f'| Jumlah Pasien Laki      | {JumlahLaki:8}         |')
+        print(f'| Jumlah Pasien Perempuan | {JumlahPerempuan:8}         |')
+        print(f'+-------------------------+------------------+')
+        print(f'| Rata-rata Berat Badan   | {RataBerat:8.2f} kg      |')
+        print(f'| Rata-rata Tinggi Badan  | {RataTinggi:8.2f} cm      |')
+        print(f'+-------------------------+------------------+')
+        print(f'| Berat Maksimum          | {MaxBerat:8} kg      |')
+        print(f'| Berat Minimum           | {MinBerat:8} kg      |')
+        print(f'| Tinggi Maksimum         | {MaxTinggi:8} cm      |')
+        print(f'| Tinggi Minimum          | {MinTinggi:8} cm      |')
+        print(f'+-------------------------+------------------+')
+        print()
+        input()
 
 
 
@@ -1057,11 +1073,11 @@ while(Pilihan != 0):
                                     
                     case 6: 
                         os.system('clear')
-                        PenghapusanData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                        BanyakData = PenghapusanData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
             
                     case 7: 
                         os.system('clear')
-                        PenghancuranArray(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa)
+                        BanyakData = PenghancuranArray(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa)
             
                     case 8: 
                         os.system('clear')
