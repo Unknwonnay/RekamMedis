@@ -76,6 +76,31 @@ def MenuPilihan(Pilihan):
     
     return Pilihan
 
+def PilihanCariPasien(MetodeCariPasein):
+    print('+================================+')
+    print('|          MENU PASIEN           |')
+    print('+================================+')
+    print('|       1. Cari Rekam Medis      |')
+    print('|       2. Cari Nama             |')
+    print('|       0. Keluar                |')
+    print('+================================+')
+    MetodeCariPasein = int(input('Pilihan ? '))
+
+    while(MetodeCariPasein  < 0) or (MetodeCariPasein  > 2):
+        print('Pilih yang ada di menu!')
+        input()
+
+        os.system('clear')
+        print('+================================+')
+        print('|          MENU PASIEN           |')
+        print('+================================+')
+        print('|         1. Cari Data           |')
+        print('|         0. Keluar              |')
+        print('+================================+')
+        MetodeCariPasein = int(input('Pilihan ? '))
+
+    return MetodeCariPasein
+
 def MenuPasien(PilihanPasien):
     print('+================================+')
     print('|          MENU PASIEN           |')
@@ -139,30 +164,65 @@ def MenuDokter(PilihanDokter):
     return PilihanDokter
 
 def IsiData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
-    Status = True
     i = BanyakData
-    print('----------------------DATA KE-', i+1, '--------------')
-    NoRM[i]           = input('No.Rekam Medis             : ')
+    stopInput = False  # Inisialisasi variabel stopInput
 
-    while(NoRM[i].upper() != 'STOP' and i < MAKSDATA and Status):
-        Nama[i]           = str(input('Nama                       : '))
-        JenisKelamin[i]   = str(input('Jenis Kelamin              : '))
-        TanggalPeriksa[i] = str(input('Tanggal Periksa            : '))
-        BeratBadan[i]     = int(input('Berat Badan                : '))
-        TinggiBadan[i]    = int(input('Tinggi Badan               : '))
-        Diagnosa[i]       = str(input('Diagnosa                   : '))
-        i = i + 1
+    while (i < MAKSDATA) and (not stopInput):
+        print(f'----------------------DATA KE-{i+1}--------------')
+        inputNoRM = input('No.Rekam Medis (atau ketik STOP untuk selesai): ').upper()
 
-        if i < MAKSDATA:
-            print('----------------------DATA KE-', i+1, '--------------')
-            NoRM[i] = str(input('No.Rekam Medis             : '))
+        # Cek jika pengguna ingin berhenti
+        if inputNoRM == 'STOP':
+            stopInput = True
         else:
-            print('Array Penuh!')
-            Status = False
+            # Validasi No RM
+            isDuplicate = False
+            for j in range(i):
+                if inputNoRM == NoRM[j]:
+                    isDuplicate = True
+                    break
 
-    BanyakData = i
+            # Jika No RM duplikat, minta input lagi
+            while isDuplicate and not stopInput:
+                print('No.Rekam Medis sudah ada. Silakan masukkan No.Rekam Medis yang lain.')
+                input()
+                os.system('clear')
+                print(f'----------------------DATA KE-{i+1}--------------')
+                inputNoRM = input('No.Rekam Medis (atau ketik STOP untuk selesai): ').upper()
 
+                # Cek jika pengguna ingin berhenti
+                if inputNoRM == 'STOP':
+                    stopInput = True
+                else:
+                    # Cek lagi apakah No RM masih duplikat
+                    isDuplicate = False
+                    for j in range(i):
+                        if inputNoRM == NoRM[j]:
+                            isDuplicate = True
+                            break
+
+            # Jika pengguna tidak memilih STOP, simpan data
+            if not stopInput:
+                NoRM[i] = inputNoRM
+
+                # Input data lainnya
+                Nama[i] = input('Nama                       : ').upper()
+                JenisKelamin[i] = input('Jenis Kelamin [L/P]        : ').upper()
+                TanggalPeriksa[i] = input('Tanggal Periksa [DD/MM/YY] : ')
+                BeratBadan[i] = float(input('Berat Badan (kg)           : '))
+                TinggiBadan[i] = float(input('Tinggi Badan (cm)          : '))
+                Diagnosa[i] = input('Diagnosa                   : ')
+
+                i += 1
+                BanyakData = i
+
+    if i >= MAKSDATA:
+        print(f'Data sudah mencapai batas maksimum ({MAKSDATA} entri).')
+
+    print('Input data selesai.')
+    input()
     return BanyakData
+
 
 def EditData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData):
     if(BanyakData == 0):
@@ -176,7 +236,7 @@ def EditData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, 
             print(f'| {i+1:2} | {NoRM[i]:15} | {Nama[i]:25} |')
         print('+--------------------------------------------------+')
 
-        NoEdit = int(input('Data yang mau di edit(No.RM)? '))
+        NoEdit = int(input('Data yang mau di edit(No urut)? '))
 
         while(NoEdit < 0) or (NoEdit > BanyakData):
             print('Pilih no yang ada')
@@ -190,7 +250,7 @@ def EditData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, 
                 print(f'| {i+1:2} | {NoRM[i]:15} | {Nama[i]:25} |')
             print('+--------------------------------------------------+')
 
-            NoEdit = int(input('Data yang mau di edit(No.RM)? '))
+            NoEdit = int(input('Data yang mau di edit(No urut)? '))
         
        
         os.system('clear')
@@ -210,10 +270,10 @@ def EditData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, 
         match(PilihanEdit):
             case 1:
                 os.system('clear')
-                Nama[NoEdit-1] = input('Nama Baru : ')
+                Nama[NoEdit-1] = input('Nama Baru : ').upper()
             case 2:
                 os.system('clear')
-                JenisKelamin[NoEdit-1] = input('Jenis Kelamin Baru : ')
+                JenisKelamin[NoEdit-1] = input('Jenis Kelamin Baru [L/P] : ').upper()
             case 3:
                 os.system('clear')
                 TanggalPeriksa[NoEdit-1] = input('Tanggal Periksa Baru : ')
@@ -225,7 +285,7 @@ def EditData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, 
                 TinggiBadan[NoEdit-1] = int(input('Tinggi Badan Baru : '))
             case 6:
                 os.system('clear')
-                Diagnosa[NoEdit-1] = input('Diagnosa Baru : ')
+                Diagnosa[NoEdit-1] = input('Diagnosa Baru : ').upper()
         print()
         print('Data berhasil diubah!')
     input()
@@ -629,7 +689,7 @@ def MenuSortingDsc(PilihanDsc):
         print('Belum ada data!')
     else:
         print('+===========================================+')
-        print('|       MENGURUTKAN DATA SECARA MENURUN      |')
+        print('|       MENGURUTKAN DATA SECARA MENURUN     |')
         print('+===========================================+')
         print('|            1. No. Rekam Medis             |')
         print('|            2. Nama                        |')
@@ -899,8 +959,8 @@ def RekapRekamMedis(JenisKelamin, BeratBadan, TinggiBadan, BanyakData):
         if (BanyakData > 0):
             MaxBerat = BeratBadan[1]
             MinBerat = BeratBadan[1]
-            MaxTinggi = BeratBadan[1]
-            MinTinggi = BeratBadan[1]
+            MaxTinggi = TinggiBadan[1]
+            MinTinggi = TinggiBadan[1]
 
         for i in range(BanyakData):
             if(JenisKelamin[i] == 'L'):
@@ -954,7 +1014,7 @@ def RekapRekamMedis(JenisKelamin, BeratBadan, TinggiBadan, BanyakData):
 
 # Algoritma Utama    
 os.system('clear')
-Pilihan = PilihanPasien = PilihanDokter = BanyakData= PilihanPengurutan=PilihanAsc=PilihanDsc=PilihanPencarian = 0
+Pilihan = PilihanPasien = PilihanDokter = BanyakData= PilihanPengurutan=PilihanAsc=PilihanDsc=PilihanPencarian =MetodeCariPasein= 0
 BanyakData = Test(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
 
 Pilihan = MenuPilihan(Pilihan)
@@ -967,11 +1027,20 @@ while(Pilihan != 0):
                 match(PilihanPasien):
                     case 1:
                         os.system('clear')
-                        UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
-                        CariNoRM(NoRM, BanyakData)
+                        MetodeCariPasein = PilihanCariPasien(MetodeCariPasein)
+                        while(MetodeCariPasein != 0):
+                            match(MetodeCariPasein):
+                                case 1:
+                                    os.system('clear')
+                                    UrutNoRMAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
+                                    CariNoRM(NoRM, BanyakData)
+                                case 2:
+                                    os.system('clear')
+                                    CariNama(Nama)
+                            os.system('clear')
+                            MetodeCariPasein = PilihanCariPasien(MetodeCariPasein)
                 os.system('clear')
                 PilihanPasien = MenuPasien(PilihanPasien)
-               
         case 2: 
             os.system('clear')
             PilihanDokter = MenuDokter(PilihanDokter)  
@@ -992,7 +1061,6 @@ while(Pilihan != 0):
             
                     case 4:  
                         os.system('clear')
-                        print('<< Pengurutan DATA >>')
                         PilihanPengurutan = MenuPengurutan(PilihanPengurutan)
                         while(PilihanPengurutan != 0):
                             match (PilihanPengurutan):
@@ -1016,8 +1084,6 @@ while(Pilihan != 0):
                                             case 5:
                                                 UrutTinggiBadanAsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
                                                 TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
-                                            case 6:
-                                                print('<< MENGURUTKAN Diagnosa SECARA ASC >>')
                                         input()
                                         os.system('clear')
                                         PilihanAsc = MenuSortingAsc(PilihanAsc)
@@ -1041,8 +1107,6 @@ while(Pilihan != 0):
                                             case 5:
                                                 UrutTinggiBadanDsc(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)
                                                 TampilData(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData)        
-                                            case 6:
-                                                print('<< MENGURUTKAN Diagnosa SECARA ASC >>')
                                         input()
                                         os.system('clear')
                                         PilihanDsc = MenuSortingDsc(PilihanDsc)

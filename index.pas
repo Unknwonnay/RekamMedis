@@ -33,7 +33,7 @@ procedure ArrayTest(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin
                             var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa );
 begin
     //array 1
-    (* NoRM[1]             := '1';
+    NoRM[1]             := 'A-01';
     Nama[1]             := 'Budi';
     JenisKelamin[1]     := 'L';
     TanggalPeriksa[1]   := '120225';
@@ -42,7 +42,7 @@ begin
     Diagnosa[1]         := 'Demam';
 
     //array 2
-    NoRM[2]             := '2';
+    NoRM[2]             := 'A-02';
     Nama[2]             := 'Yanto';
     JenisKelamin[2]     := 'L';
     TanggalPeriksa[2]   := '120225';
@@ -51,7 +51,7 @@ begin
     Diagnosa[2]         := 'Demam';
 
     //array 3
-    NoRM[3]             := '3';
+    NoRM[3]             := 'A-03';
     Nama[3]             := 'Gusti';
     JenisKelamin[3]     := 'L';
     TanggalPeriksa[3]   := '120225';
@@ -59,12 +59,12 @@ begin
     TinggiBadan[3]      := 160;
     Diagnosa[3]         := 'Diare';
 
-    BanyakData := 3; *)
+    BanyakData := 3;
 end;
 
 procedure PenghancuranArray(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
                             var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
-                            var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa );
+                            var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa; var BanyakData : integer );
 var
     i : integer;
 begin
@@ -77,6 +77,9 @@ begin
         BeratBadan[i]     := 0;
         TinggiBadan[i]    := 0;
         Diagnosa[i]       := '/';
+        BanyakData        := 0;
+        writeln('Data berhasil dihancurkan!');
+        readln();
     end;
 end;
 
@@ -209,19 +212,69 @@ procedure IsiData(var NoRM: ArrayNoRM; var Nama: ArrayNama; var JenisKelamin: Ar
                   var TanggalPeriksa: ArrayTanggal; var BeratBadan: ArrayBerat; 
                   var TinggiBadan: ArrayTinggi; var Diagnosa: ArrayDiagnosa; var BanyakData: integer);
 var
-    i: integer;
+    i,j : integer;
+    inputNoRM :string;
+    Duplikat, stopInput: boolean;
 begin
     i := BanyakData + 1;
+    stopInput := false; // Inisialisasi variabel stopInput
 
-    while (i <= 10) and (NoRM[i] <> 'STOP') do
+    while (i <= MAKSDATA) and (not stopInput) do
     begin
         writeln('----------------------DATA KE-', i, '--------------');
-        write('No.Rekam Medis             : '); readln(NoRM[i]);
-        NoRM[i] := UpperCase(NoRM[i]);
+        write('No.Rekam Medis (atau ketik STOP untuk selesai): '); 
+        readln(inputNoRM);
+        inputNoRM := UpperCase(inputNoRM);
 
-        if NoRM[i] = 'STOP' then
-            break;
+        // Cek jika pengguna ingin berhenti
+        if inputNoRM = 'STOP' then
+            stopInput := true
+        else
+        begin
+        // Validasi No RM
+            Duplikat := false;
+            for j := 1 to i - 1 do
+            begin
+                if inputNoRM = NoRM[j] then
+                begin
+                Duplikat := true;
+            end;
+    end;
 
+    // Jika No RM duplikat, minta input lagi
+    while Duplikat and (not stopInput) do
+    begin
+    writeln('No.Rekam Medis sudah ada. Silakan masukkan No.Rekam Medis yang lain.');
+    readln();
+    clrscr;
+    writeln('----------------------DATA KE-', i, '--------------');
+    write('No.Rekam Medis (atau ketik STOP untuk selesai): '); 
+    readln(inputNoRM);
+    inputNoRM := UpperCase(inputNoRM);
+
+    // Cek jika pengguna ingin berhenti
+    if inputNoRM = 'STOP' then
+        stopInput := true
+    else
+    begin
+        // Cek lagi apakah No RM masih duplikat
+        Duplikat := false;
+        for j := 1 to i - 1 do
+        begin
+            if inputNoRM = NoRM[j] then
+            begin
+                Duplikat := true;
+            end;
+        end;
+    end;
+    end;
+
+    // Jika pengguna tidak memilih STOP, simpan data
+    if (not stopInput) then
+    begin
+        NoRM[i] := inputNoRM;
+
+        // Input data lainnya
         write('Nama                       : '); readln(Nama[i]);
         Nama[i] := UpperCase(Nama[i]);
         write('Jenis Kelamin [L/P]        : '); readln(JenisKelamin[i]);
@@ -232,15 +285,19 @@ begin
         write('Diagnosa                   : '); readln(Diagnosa[i]);
 
         i := i + 1;
+        BanyakData := i-1;
+        end;
+        end;
     end;
 
-    if i > 10 then
+    if (i > MAKSDATA) then
     begin
-        writeln('Data sudah mencapai batas maksimum (10 entri).');
+    writeln('Data sudah mencapai batas maksimum (', MAKSDATA, ' entri).');
     end;
 
-    BanyakData := i - 1; // Update jumlah data yang berhasil dimasukkan
-end;
+    writeln('Input data selesai.');
+    readln;
+    end;
 
 procedure EditData(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisKelamin : ArrayKelamin; 
                     var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
@@ -263,7 +320,7 @@ begin
             writeln('| ',NoRM[i]:15 ,' | ', Nama[i]:25 ,' |');
         end;
 
-        write('Data yang mau di edit(No.RM)?');readln(NoEdit);
+        write('Data yang mau di edit(No.Urut)?');readln(NoEdit);
 
         while(NoEdit < 0 ) or (NoEdit > BanyakData ) do
         begin
@@ -280,7 +337,7 @@ begin
                 writeln('| ',NoRM[i]:15 ,' | ', Nama[i]:25 ,' |');
             end;
 
-            write('Data yang mau di edit(No.RM)?');readln(NoEdit);
+            write('Data yang mau di edit(No.Urut)?');readln(NoEdit);
         end;
 
         clrscr;
@@ -549,33 +606,33 @@ begin
                 max := j;
             end;
         end;
-    TempStr := Nama[max];
-    Nama[max] := Nama[j];
-    Nama[j] := TempStr;
+        TempStr := Nama[max];
+        Nama[max] := Nama[j];
+        Nama[j] := TempStr;
 
-    TempStr := NoRM[max];
-    NoRM[max] := NoRM[j];
-    NoRM[j] := TempStr;
-    
-    TempStr := JenisKelamin[max];
-    JenisKelamin[max] := JenisKelamin[j];
-    JenisKelamin[j] := TempStr;
+        TempStr := NoRM[max];
+        NoRM[max] := NoRM[j];
+        NoRM[j] := TempStr;
+        
+        TempStr := JenisKelamin[max];
+        JenisKelamin[max] := JenisKelamin[j];
+        JenisKelamin[j] := TempStr;
 
-    TempStr := TanggalPeriksa[max];
-    TanggalPeriksa[max] := TanggalPeriksa[j];
-    TanggalPeriksa[j] := TempStr;
+        TempStr := TanggalPeriksa[max];
+        TanggalPeriksa[max] := TanggalPeriksa[j];
+        TanggalPeriksa[j] := TempStr;
 
-    TempInt := BeratBadan[max];
-    BeratBadan[max] := BeratBadan[j];
-    BeratBadan[j] := TempInt;
+        TempInt := BeratBadan[max];
+        BeratBadan[max] := BeratBadan[j];
+        BeratBadan[j] := TempInt;
 
-    TempInt := TinggiBadan[max];
-    TinggiBadan[max] := TinggiBadan[j];
-    TinggiBadan[j] := TempInt;
+        TempInt := TinggiBadan[max];
+        TinggiBadan[max] := TinggiBadan[j];
+        TinggiBadan[j] := TempInt;
 
-    TempStr := Diagnosa[max];
-    Diagnosa[max] := Diagnosa[j];
-    Diagnosa[j] := TempStr;
+        TempStr := Diagnosa[max];
+        Diagnosa[max] := Diagnosa[j];
+        Diagnosa[j] := TempStr;
     end;
 end;
 
@@ -590,37 +647,37 @@ var
 begin
     for i := 1 to N-1 do
     begin
-        for j := N downto i+1 do
+        for j := 1 to BanyakData - i do
         begin
-            if(NoRM[j] > NoRM[j-1]) then
+            if(NoRM[j] < NoRM[j+1]) then
             begin
                 TempStr := NoRM[j];
-                NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempStr;
+                NoRM[j] := NoRM[j+1];
+                NoRM[j+1] := TempStr;
                 
                 TempStr := Nama[j];
-                Nama[j] := Nama[j-1];
-                Nama[j-1] := TempStr;
+                Nama[j] := Nama[j+1];
+                Nama[j+1] := TempStr;
 
                 TempStr := JenisKelamin[j];
-                JenisKelamin[j] := JenisKelamin[j-1];
-                JenisKelamin[j-1] := TempStr;
+                JenisKelamin[j] := JenisKelamin[j+1];
+                JenisKelamin[j+1] := TempStr;
 
                 TempStr := TanggalPeriksa[j];
-                TanggalPeriksa[j] := TanggalPeriksa[j-1];
-                TanggalPeriksa[j-1] := TempStr;
+                TanggalPeriksa[j] := TanggalPeriksa[j+1];
+                TanggalPeriksa[j+1] := TempStr;
 
                 TempInt := BeratBadan[j];
-                BeratBadan[j] := BeratBadan[j-1];
-                BeratBadan[j-1] := TempInt;
+                BeratBadan[j] := BeratBadan[j+1];
+                BeratBadan[j+1] := TempInt;
 
                 TempInt := TinggiBadan[j];
-                TinggiBadan[j] := TinggiBadan[j-1];
-                TinggiBadan[j-1] := TempInt;
+                TinggiBadan[j] := TinggiBadan[j+1];
+                TinggiBadan[j+1] := TempInt;
 
                 TempStr := Diagnosa[j];
-                Diagnosa[j] := Diagnosa[j-1];
-                Diagnosa[j-1] := TempStr;
+                Diagnosa[j] := Diagnosa[j+1];
+                Diagnosa[j+1] := TempStr;
 
             end;
         end;
@@ -636,37 +693,37 @@ var
 begin
     for i := 1 to N-1 do
     begin
-        for j := N downto i+1 do
+        for j := 1 to BanyakData - i do
         begin
-            if(Nama[j] > Nama[j-1]) then
+            if(Nama[j] > Nama[j+1]) then
             begin
                 TempStr := Nama[j];
-                Nama[j] := Nama[j-1];
-                Nama[j-1] := TempStr;
+                Nama[j] := Nama[j+1];
+                Nama[j+1] := TempStr;
 
                 TempStr := NoRM[j];
-                NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempStr;
+                NoRM[j] := NoRM[j+1];
+                NoRM[j+1] := TempStr;
                 
                 TempStr := JenisKelamin[j];
-                JenisKelamin[j] := JenisKelamin[j-1];
-                JenisKelamin[j-1] := TempStr;
+                JenisKelamin[j] := JenisKelamin[j+1];
+                JenisKelamin[j+1] := TempStr;
 
                 TempStr := TanggalPeriksa[j];
-                TanggalPeriksa[j] := TanggalPeriksa[j-1];
-                TanggalPeriksa[j-1] := TempStr;
+                TanggalPeriksa[j] := TanggalPeriksa[j+1];
+                TanggalPeriksa[j+1] := TempStr;
 
                 TempInt := BeratBadan[j];
-                BeratBadan[j] := BeratBadan[j-1];
-                BeratBadan[j-1] := TempInt;
+                BeratBadan[j] := BeratBadan[j+1];
+                BeratBadan[j+1] := TempInt;
 
                 TempInt := TinggiBadan[j];
-                TinggiBadan[j] := TinggiBadan[j-1];
-                TinggiBadan[j-1] := TempInt;
+                TinggiBadan[j] := TinggiBadan[j+1];
+                TinggiBadan[j+1] := TempInt;
 
                 TempStr := Diagnosa[j];
-                Diagnosa[j] := Diagnosa[j-1];
-                Diagnosa[j-1] := TempStr;
+                Diagnosa[j] := Diagnosa[j+1];
+                Diagnosa[j+1] := TempStr;
 
             end;
         end;
@@ -683,37 +740,37 @@ var
 begin
     for i := 1 to N-1 do
     begin
-        for j := N downto i+1 do
+        for j := 1 to BanyakData - i do
         begin
-            if(TanggalPeriksa[j] > TanggalPeriksa[j-1]) then
+            if(TanggalPeriksa[j] > TanggalPeriksa[j+1]) then
             begin
                 TempStr := Nama[j];
-                Nama[j] := Nama[j-1];
-                Nama[j-1] := TempStr;
+                Nama[j] := Nama[j+1];
+                Nama[j+1] := TempStr;
 
                 TempStr := NoRM[j];
-                NoRM[j] := NoRM[j-1];
-                NoRM[j-1] := TempStr;
+                NoRM[j] := NoRM[j+1];
+                NoRM[j+1] := TempStr;
                 
                 TempStr := JenisKelamin[j];
-                JenisKelamin[j] := JenisKelamin[j-1];
-                JenisKelamin[j-1] := TempStr;
+                JenisKelamin[j] := JenisKelamin[j+1];
+                JenisKelamin[j+1] := TempStr;
 
                 TempStr := TanggalPeriksa[j];
-                TanggalPeriksa[j] := TanggalPeriksa[j-1];
-                TanggalPeriksa[j-1] := TempStr;
+                TanggalPeriksa[j] := TanggalPeriksa[j+1];
+                TanggalPeriksa[j+1] := TempStr;
 
                 TempInt := BeratBadan[j];
-                BeratBadan[j] := BeratBadan[j-1];
-                BeratBadan[j-1] := TempInt;
+                BeratBadan[j] := BeratBadan[j+1];
+                BeratBadan[j+1] := TempInt;
 
                 TempInt := TinggiBadan[j];
-                TinggiBadan[j] := TinggiBadan[j-1];
-                TinggiBadan[j-1] := TempInt;
+                TinggiBadan[j] := TinggiBadan[j+1];
+                TinggiBadan[j+1] := TempInt;
 
                 TempStr := Diagnosa[j];
-                Diagnosa[j] := Diagnosa[j-1];
-                Diagnosa[j-1] := TempStr;
+                Diagnosa[j] := Diagnosa[j+1];
+                Diagnosa[j+1] := TempStr;
 
             end;
         end;
@@ -730,46 +787,41 @@ var
 begin
     for i := 1 to N-1 do
     begin
-        max := i;
-        for j := i+1 to N do
+        max := 1;
+        for j := 2 to (N+1) - i do
         begin
-            if (BeratBadan[j] > BeratBadan[max]) then
+            if (BeratBadan[j] < BeratBadan[max]) then
             begin
                 max := j;
             end;
         end;
+        TempStr := Nama[max];
+        Nama[max] := Nama[i];
+        Nama[i] := TempStr;
 
-        // Swap data jika max berbeda dari i
-        if (max <> i) then
-        begin
-            TempStr := Nama[i];
-            Nama[i] := Nama[max];
-            Nama[max] := TempStr;
+        TempStr := NoRM[max];
+        NoRM[max] := NoRM[i];
+        NoRM[i] := TempStr;
+            
+        TempStr := JenisKelamin[max];
+        JenisKelamin[max] := JenisKelamin[i];
+        JenisKelamin[i] := TempStr;
 
-            TempStr := NoRM[i];
-            NoRM[i] := NoRM[max];
-            NoRM[max] := TempStr;
-                
-            TempStr := JenisKelamin[i];
-            JenisKelamin[i] := JenisKelamin[max];
-            JenisKelamin[max] := TempStr;
+        TempStr := TanggalPeriksa[max];
+        TanggalPeriksa[max] := TanggalPeriksa[i];
+        TanggalPeriksa[i] := TempStr;
 
-            TempStr := TanggalPeriksa[i];
-            TanggalPeriksa[i] := TanggalPeriksa[max];
-            TanggalPeriksa[max] := TempStr;
+        TempInt := BeratBadan[max];
+        BeratBadan[max] := BeratBadan[i];
+        BeratBadan[i] := TempInt;
 
-            TempInt := BeratBadan[i];
-            BeratBadan[i] := BeratBadan[max];
-            BeratBadan[max] := TempInt;
+        TempInt := TinggiBadan[max];
+        TinggiBadan[max] := TinggiBadan[i];
+        TinggiBadan[i] := TempInt;
 
-            TempInt := TinggiBadan[i];
-            TinggiBadan[i] := TinggiBadan[max];
-            TinggiBadan[max] := TempInt;
-
-            TempStr := Diagnosa[i];
-            Diagnosa[i] := Diagnosa[max];
-            Diagnosa[max] := TempStr;
-        end;
+        TempStr := Diagnosa[max];
+        Diagnosa[max] := Diagnosa[i];
+        Diagnosa[i] := TempStr;
     end;
 end;
 
@@ -778,46 +830,46 @@ procedure UrutTinggiBadanDsc(var NoRM : ArrayNoRM; var Nama : ArrayNama; var Jen
             var TanggalPeriksa : ArrayTanggal; var BeratBadan : ArrayBerat; 
             var TinggiBadan : ArrayTinggi; var Diagnosa : ArrayDiagnosa; N : integer);
 var
-    i,j,TempInt, max : integer;
+    i,j,TempInt, min : integer;
     TempStr : string;
 begin
     for i := 1 to N-1 do
     begin
-        max := 1;
-        for j := 2 to (N+1) - i do
+        min := i;
+        for j := i+1 to N do
         begin
-            if(TinggiBadan[j] < TinggiBadan[max]) then
+            if(TinggiBadan[j] > TinggiBadan[min]) then
             begin
-                max := j;
+                min := j;
             end;
         end;
-    TempStr := Nama[max];
-    Nama[max] := Nama[j];
-    Nama[j] := TempStr;
+    TempStr := Nama[min];
+    Nama[min] := Nama[i];
+    Nama[i] := TempStr;
 
-    TempStr := NoRM[max];
-    NoRM[max] := NoRM[j];
-    NoRM[j] := TempStr;
+    TempStr := NoRM[min];
+    NoRM[min] := NoRM[i];
+    NoRM[i] := TempStr;
     
-    TempStr := JenisKelamin[max];
-    JenisKelamin[max] := JenisKelamin[j];
-    JenisKelamin[j] := TempStr;
+    TempStr := JenisKelamin[min];
+    JenisKelamin[min] := JenisKelamin[i];
+    JenisKelamin[i] := TempStr;
 
-    TempStr := TanggalPeriksa[max];
-    TanggalPeriksa[max] := TanggalPeriksa[j];
-    TanggalPeriksa[j] := TempStr;
+    TempStr := TanggalPeriksa[min];
+    TanggalPeriksa[min] := TanggalPeriksa[i];
+    TanggalPeriksa[i] := TempStr;
 
-    TempInt := BeratBadan[max];
-    BeratBadan[max] := BeratBadan[j];
-    BeratBadan[j] := TempInt;
+    TempInt := BeratBadan[min];
+    BeratBadan[min] := BeratBadan[i];
+    BeratBadan[i] := TempInt;
 
-    TempInt := TinggiBadan[max];
-    TinggiBadan[max] := TinggiBadan[j];
-    TinggiBadan[j] := TempInt;
+    TempInt := TinggiBadan[min];
+    TinggiBadan[min] := TinggiBadan[i];
+    TinggiBadan[i] := TempInt;
 
-    TempStr := Diagnosa[max];
-    Diagnosa[max] := Diagnosa[j];
-    Diagnosa[j] := TempStr;
+    TempStr := Diagnosa[min];
+    Diagnosa[min] := Diagnosa[i];
+    Diagnosa[i] := TempStr;
     end;
 end;
 
@@ -878,8 +930,6 @@ procedure PenghapusanData(var NoRM : ArrayNoRM; var Nama : ArrayNama; var JenisK
 
 var
     i, indeks, NoHapus  : integer;
-    (* found: boolean;
-    PosHapus : integer; *)
 begin
     if (BanyakData = 0) then
     begin
@@ -903,7 +953,6 @@ begin
         begin
             if (NoHapus >= 1) and (NoHapus <= BanyakData) then
             begin
-                // Geser elemen array ke kiri mulai dari posisi hapus
                 for indeks := (NoHapus + 1) to BanyakData do
                 begin
                     NoRM[indeks - 1]           := NoRM[indeks];
@@ -914,7 +963,6 @@ begin
                     TinggiBadan[indeks - 1]    := TinggiBadan[indeks];
                     Diagnosa[indeks - 1]       := Diagnosa[indeks];
                 end;
-                // Set elemen terakhir ke 0 (opsional, tergantung kebutuhan)
                 NoRM[BanyakData] := '/';
                 Nama[BanyakData] := '/';
                 JenisKelamin[BanyakData] := '/';
@@ -923,7 +971,6 @@ begin
                 TinggiBadan[BanyakData] := 0;
                 Diagnosa[BanyakData] := '/';
                 
-                // Kurangi jumlah data
                 BanyakData := BanyakData - 1;
             end
             else
@@ -962,6 +1009,8 @@ begin
     end;
 end;
 
+
+//Mencari No Rekam Medis menggunakan Binary Search
 procedure CariNoRM(NoRM: ArrayNoRM; BanyakData: Integer);
 var
     Ia, Ib, K : Integer;
@@ -983,7 +1032,7 @@ begin
 
         if (NoRM[K] = DataCari) then
         begin
-            Ketemu := True; // Data ditemukan
+            Ketemu := True; 
         end
         else
         begin
@@ -1018,6 +1067,7 @@ begin
     end;
 end;
 
+
 procedure CariNama(var Nama : ArrayNama);
 var
     i : integer;
@@ -1049,22 +1099,24 @@ begin
         writeln(DataCari,'Tidak ditemukan');
         
     end;
+
+    readln();
 end;
 
 procedure CariJenisKelamin(var JenisKelamin : ArrayKelamin);
 var
     i : integer;
     DataCari : string;
-    Ditemukan : boolean; // Variabel untuk menandai apakah data ditemukan
+    Ditemukan : boolean; 
 begin
     write('Jenis Kelamin yang dicari : '); readln(DataCari);
-    Ditemukan := false; // Awalnya asumsikan data tidak ditemukan
+    Ditemukan := false; 
 
-    for i := 1 to MAKSDATA do // Periksa semua data dalam array
+    for i := 1 to MAKSDATA do 
     begin
         if JenisKelamin[i] = DataCari then
         begin
-            Ditemukan := true; // Data ditemukan
+            Ditemukan := true; 
             writeln('+-------------------------------------------------------+');
             writeln('|                 DATA PASEIN-',i,'                         |');
             writeln('+-------------------------------------------------------+');
@@ -1076,7 +1128,7 @@ begin
             writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
             writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
             writeln('+-------------------------------------------------------+');
-            writeln; // Beri jarak antar data
+            writeln; 
         end;
     end;
 
@@ -1090,16 +1142,16 @@ procedure CariTanggalPeriksa(var TanggalPeriksa : ArrayTanggal);
 var
     i : integer;
     DataCari : string;
-    Ditemukan : boolean; // Variabel untuk menandai apakah data ditemukan
+    Ditemukan : boolean; 
 begin
     write('Tanggal Periksa yang dicari : ');readln(DataCari);
-    Ditemukan := false; // Awalnya asumsikan data tidak ditemukan
+    Ditemukan := false; 
 
-    for i := 1 to MAKSDATA do // Periksa semua data dalam array
+    for i := 1 to MAKSDATA do 
     begin
         if(TanggalPeriksa[i] = DataCari) then
         begin
-            Ditemukan := true; // Data ditemukan
+            Ditemukan := true; 
             writeln('+-------------------------------------------------------+');
             writeln('|                 DATA PASEIN-',i,'                         |');
             writeln('+-------------------------------------------------------+');
@@ -1111,7 +1163,7 @@ begin
             writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
             writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
             writeln('+-------------------------------------------------------+');
-            writeln; // Beri jarak antar data
+            writeln; 
         end;
     end;
 
@@ -1125,16 +1177,16 @@ end;
 procedure CariBeratBadan(var BeratBadan : ArrayBerat);
 var
     i,DataCari : integer;
-    Ditemukan : boolean; // Variabel untuk menandai apakah data ditemukan
+    Ditemukan : boolean; 
 begin
     write('Berat Badan yang dicari : ');readln(DataCari);
-    Ditemukan := false; // Awalnya asumsikan data tidak ditemukan
+    Ditemukan := false; 
 
-    for i := 1 to MAKSDATA do // Periksa semua data dalam array
+    for i := 1 to MAKSDATA do 
     begin
         if(BeratBadan[i] = DataCari) then
         begin
-            Ditemukan := true; // Data ditemukan
+            Ditemukan := true; 
             writeln('+-------------------------------------------------------+');
             writeln('|                 DATA PASEIN-',i,'                         |');
             writeln('+-------------------------------------------------------+');
@@ -1146,7 +1198,7 @@ begin
             writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
             writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
             writeln('+-------------------------------------------------------+');
-            writeln; // Beri jarak antar data
+            writeln; 
         end;
     end;
 
@@ -1160,16 +1212,16 @@ end;
 procedure CariTinggiBadan(var TinggiBadan : ArrayTinggi);
 var
     i,DataCari : integer;
-    Ditemukan : boolean; // Variabel untuk menandai apakah data ditemukan
+    Ditemukan : boolean; 
 begin
     write('Tinggi Badan yang dicari : ');readln(DataCari);
-    Ditemukan := false; // Awalnya asumsikan data tidak ditemukan
+    Ditemukan := false; 
 
-    for i := 1 to MAKSDATA do // Periksa semua data dalam array
+    for i := 1 to MAKSDATA do 
     begin
         if(TinggiBadan[i] = DataCari) then
         begin
-            Ditemukan := true; // Data ditemukan
+            Ditemukan := true; 
             writeln('+-------------------------------------------------------+');
             writeln('|                 DATA PASEIN-',i,'                         |');
             writeln('+-------------------------------------------------------+');
@@ -1181,7 +1233,7 @@ begin
             writeln('| Tinggi Badan               :         ', TinggiBadan[i]:5, '            |');
             writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
             writeln('+-------------------------------------------------------+');
-            writeln; // Beri jarak antar data
+            writeln; 
         end;
     end;
 
@@ -1195,16 +1247,16 @@ procedure CariDiagnosa(var Diagnosa : ArrayDiagnosa);
 var
     i : integer;
     DataCari : string;
-    Ditemukan : boolean; // Variabel untuk menandai apakah data ditemukan
+    Ditemukan : boolean; 
 begin
     write('Diagnosa yang dicari : ');readln(DataCari);
-    Ditemukan := false; // Awalnya asumsikan data tidak ditemukan
+    Ditemukan := false; 
 
-    for i := 1 to MAKSDATA do // Periksa semua data dalam array
+    for i := 1 to MAKSDATA do 
     begin
         if(Diagnosa[i] = DataCari) then
         begin
-            Ditemukan := true; // Data ditemukan
+            Ditemukan := true; 
             writeln('+-------------------------------------------------------+');
             writeln('|                 DATA PASEIN-',i,'                         |');
             writeln('+-------------------------------------------------------+');
@@ -1217,7 +1269,7 @@ begin
             writeln('| Diagnosa                   : ', Diagnosa[i]:15, '          |');
             writeln('+-------------------------------------------------------+');
 
-            writeln; // Beri jarak antar data
+            writeln; 
         end;
     end;
 
@@ -1570,9 +1622,7 @@ begin
                         end;
                         7: begin
                             clrscr;
-                            PenghancuranArray(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa);
-                            BanyakData := 0;
-                            writeln('Semua data telah dihancurkan');
+                            PenghancuranArray(NoRM, Nama, JenisKelamin, TanggalPeriksa, BeratBadan, TinggiBadan, Diagnosa, BanyakData);
                             readln;
                         end;
                         8: begin
